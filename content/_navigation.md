@@ -1,0 +1,48 @@
+---
+MenuLinks:
+  - name: "Home"
+    href: "/"
+  - name: "Shop"
+    href: "/shop"
+    children:
+      - name: "Food"
+        href: "#"
+        children:
+          - name: "Corn Flour"
+            description: "The best corn flour in town. ready to cook. You just put the comal the masa is ready."
+            icon: "lucide:wheat"
+            href: "/food/masa-para-tortillas"
+          - name: "Chiles"
+            description: "The best chiles, hotsouce and all."
+            icon: "lucide:flame"
+            href: "/food/hot-souce-y-chiles"
+      - name: "Bundles"
+        href: "#"
+        children:
+          - name: "El tortillero"
+            description: "All the utensiles needed to make the best tortillas, like in the Rancho."
+            icon: "lucide:utensils"
+            href: "/bundle/tortillero"
+  - name: "Our Story"
+    href: "/about"
+  - name: "Recipies"
+    href: "/recipies"
+
+ShortLinks:
+  - name: "About us"
+    href: "/about"
+  - name: "Press"
+    href: "#"
+  - name: "Careers"
+    href: "#"
+  - name: "Legal"
+    href: "#"
+  - name: "Support"
+    href: "#"
+  - name: "Contact"
+    href: "tel:+1-256-559-5900"
+  - name: "Sitemap"
+    href: "#"
+  - name: "Cookie settings"
+    href: "#"
+---
