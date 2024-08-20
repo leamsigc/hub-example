@@ -25,7 +25,8 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
   <section class="relative">
     <img
       :src="heroImageUrl"
-      class="absolute inset-0 h-full w-full hidden lg:block blur-3xl dark:opacity-10"
+      class="absolute inset-0 h-full w-full hidden lg:block blur-3xl bg-blend-exclusion dark:bg-blend-darken"
+      :alt="alt"
     >
     <div
       class="container mx-auto px-4 "
@@ -36,7 +37,7 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
             <div class="w-full px-4 md:w-10/12 xl:w-8/12">
               <h1 class="mb-10 flex flex-col items-start justify-start gap-6">
                 <div
-                  class="text-6xl font-bold leading-tight text-slate-900 dark:text-slate-300"
+                  class="text-6xl font-bold leading-tight text-slate-950 dark:text-slate-300"
                   v-html="title"
                 />
                 <div
@@ -46,10 +47,9 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
               </h1>
               <UiButton class="px-16 py-6 rounded-full" variant="outline" :href="href">
                 <slot>
-                  <span class="mr-5 inline-block text-2xl">
-                    Call now
+                  <span class="mr-5 inline-block">
+                    Start Your Baby Name Journey Now
                   </span>
-                  <Icon name="material-symbols:call-end" class="" :size="'24'" />
                 </slot>
               </UiButton>
             </div>

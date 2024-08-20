@@ -9,15 +9,18 @@ export default defineNuxtConfig({
   // Nuxt Modules
   // https://nuxt.com/modules
   modules: [
+    "@nuxtjs/tailwindcss",
     "@nuxt/content",
     "@nuxthub/core",
     "@nuxt/eslint",
-    "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
     "@vueuse/nuxt",
     "nuxt-icon",
     "@samk-dev/nuxt-vcalendar",
     "@vee-validate/nuxt",
+    "@nuxtjs/seo",
+    "@unlighthouse/nuxt",
+    "@formkit/nuxt",
   ],
 
   hub: {
@@ -84,9 +87,10 @@ export default defineNuxtConfig({
     includeWorkspace: true,
   },
   site: {
-    url: "https://rosamexicanrestauranthuntsville.com",
-    name: "Rosa Mexican Cocina",
-    description: "The best mexican around the Huntsville Area!",
+    url: "https://babyname.leamsigc.com",
+    name: "NameNest: Tailored Baby Names**",
+    description:
+      "Discover the perfect baby name with NameNest! Our personalized baby name generator uses your unique preferences to suggest names that resonate with your cultural background, values, and style. Whether you seek names that are traditional, modern, or completely unique, NameNest provides meaningful, well-researched options that reflect your desires. Easily find names with specific origins, meanings, or themes—whether you want a name that symbolizes peace, wisdom, or strength, or simply one that sounds beautiful and is easy to pronounce. Ideal for parents looking for a name that stands out while staying true to their heritage and beliefs. Start your journey to the perfect baby name today!",
     defaultLocale: "en", // not needed if you have @nuxtjs/i18n installed
   },
 });

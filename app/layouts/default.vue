@@ -29,7 +29,7 @@ const { data } = await useAsyncData('Navigation', () => queryContent('/').where(
 
 <template>
   <div
-    class="min-h-screen flex flex-col"
+    class="min-h-screen flex flex-col "
   >
   <UiToastToaster />
     <NavigationHeaderSecondary

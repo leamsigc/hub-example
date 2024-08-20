@@ -1,7 +1,11 @@
-const { fontFamily } = require("tailwindcss/defaultTheme");
+/** @type {import('tailwindcss').Config} */
+import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme"
+import animate from "tailwindcss-animate"
 
-/**@type {import('tailwindcss').Config} */
-module.exports = {
+
+
+export default <Partial<Config>>{
   darkMode: "class",
   theme: {
     extend: {
@@ -13,11 +17,11 @@ module.exports = {
           lg: "4rem",
         },
         screens: {
-          "2xl": "1300px",
+          "2xl": "1440px",
         },
       },
       fontFamily: {
-        sans: ["Inter var", "Inter", ...fontFamily.sans],
+        sans: ["Josefin Sans", "Inter var", "Inter", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -95,5 +99,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("@tailwindcss/forms")({ strategy: "class" })],
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require('@tailwindcss/typography'), animate],
+  content: [],
 };
