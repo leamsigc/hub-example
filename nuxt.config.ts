@@ -19,8 +19,10 @@ export default defineNuxtConfig({
     "@samk-dev/nuxt-vcalendar",
     "@vee-validate/nuxt",
     "@nuxtjs/seo",
+    "nuxt-swiper",
     "@unlighthouse/nuxt",
     "@formkit/nuxt",
+    "@nuxt/image"
   ],
 
   hub: {
