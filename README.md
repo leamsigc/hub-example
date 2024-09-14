@@ -49,3 +49,76 @@ npx nuxthub deploy
 Then checkout your server logs, analaytics and more in the [NuxtHub Admin](https://admin.hub.nuxt.com).
 
 You can also deploy using [Cloudflare Pages CI](https://hub.nuxt.com/docs/getting-started/deploy#cloudflare-pages-ci).
+
+
+
+--- 
+
+##Database  overview
+
+
+```mermaid
+erDiagram
+    Users {
+      int id PK "Primary Key, Auto Increment"
+      text email "Unique, Not Null"
+      text emailToVerify
+      text name "Not Null"
+      text avatar
+      int githubId "Unique"
+      text githubToken
+      text twitchId "Unique"
+      text twitchToken
+      text verifiedAt
+      text createdAt "Not Null, Default: current_timestamp"
+      text updatedAt "Not Null, Default: current_timestamp, On Update: current_timestamp"
+    }
+
+    Tools {
+      int id PK "Primary Key, Auto Increment"
+      text url
+      text description
+      int likes
+      text tags
+      text pricing
+    }
+
+    Promotions {
+      int id PK "Primary Key, Auto Increment"
+      int toolId FK "Foreign Key to Tools"
+      text from
+      text to
+      text tag "Tag for Promotion"
+    }
+
+    Tags {
+      int id PK "Primary Key, Auto Increment"
+      text name
+      text label
+    }
+
+    Stats {
+      int id PK "Primary Key, Auto Increment"
+      int toolId FK "Foreign Key to Tools"
+      int views
+      int clicks
+      int likes
+    }
+
+    Images {
+      int id PK "Primary Key, Auto Increment"
+      int toolId FK "Foreign Key to Tools"
+      text url "Image URL"
+      text tag "Tag for Main Image"
+    }
+
+    %% Relationships
+    Users ||--o{ Tools : "User can create many tools"
+    Tools ||--o{ Images : "One tool has many images"
+    Tools ||--o| Promotions : "One tool has one promotion"
+    Tools ||--|| Stats : "One tool has one stat"
+    Tools ||--o{ Tags : "Tools can have multiple tags"
+    Images ||--o| Tags : "Images can have one tag"
+    Promotions ||--o| Tags : "Promotions can have one tag"
+
+```

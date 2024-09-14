@@ -96,7 +96,7 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
         >
         <span class="font-black lg:text-2xl">{{ logoLink.title }}</span>
       </NuxtLink>
-      <div class="ml-auto">
+      <div >
         <slot />
       </div>
       <div class="lg:hidden">

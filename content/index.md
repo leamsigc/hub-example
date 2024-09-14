@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: "default"
 navLabel: 'HOME'
 title: Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names
 description: Find the perfect baby name tailored to your preferences with NameNest! Explore unique, meaningful, and culturally significant baby names that match your style, values, and heritage.
