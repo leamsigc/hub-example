@@ -11,11 +11,13 @@
     "typecheck": "nuxt typecheck",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "db:turso": "drizzle-kit push:sqlite --config=drizzle.config.ts"
   },
   "dependencies": {
     "@internationalized/date": "^3.5.5",
     "@internationalized/number": "^3.5.3",
+    "@libsql/client": "^0.11.0",
     "@nuxt/eslint": "^0.5.1",
     "@nuxt/image": "^1.7.0",
     "@nuxthub/core": "^0.7.3",
@@ -25,6 +27,7 @@
     "datatables.net-searchbuilder-dt": "^1.8.0",
     "datatables.net-select-dt": "^2.0.5",
     "datatables.net-vue3": "^3.0.2",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.33.0",
     "jszip": "^3.10.1",
     "nuxt": "^3.12.4",
@@ -52,7 +55,9 @@
     "drizzle-kit": "^0.24.2",
     "eslint": "^9.9.0",
     "lightgallery": "^2.7.2",
+    "nuxt-auth-utils": "^0.3.8",
     "nuxt-icon": "1.0.0-beta.7",
+    "nuxt-security": "2.0.0-rc.9",
     "nuxt-swiper": "^1.2.2",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.6",

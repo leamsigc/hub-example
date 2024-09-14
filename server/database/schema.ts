@@ -20,7 +20,17 @@ export const users = sqliteTable('users', {
     .$defaultFn(() => sql`(current_timestamp)`)
     .$onUpdateFn(() => sql`(current_timestamp)`),
 })
+export const userRoles = sqliteTable('user_roles', {
+  userId: integer('user_id').references(() => users.id),
+  roleId: integer('role_id').references(() => roles.id),
+});
 
+
+export const roles = sqliteTable('roles',{
+  id: integer('id').primaryKey({autoIncrement:true}),
+  label: text('label').notNull(),
+  name: text('name').notNull()
+})
 
 export const tools = sqliteTable('tools', {
   id: integer('id').primaryKey({ autoIncrement: true }),

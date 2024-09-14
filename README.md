@@ -112,6 +112,11 @@ erDiagram
       text tag "Tag for Main Image"
     }
 
+  Roles {
+      int id PK "Primary Key, Auto Increment"
+      text name "Role name"
+      text label "Role label"
+    }
     %% Relationships
     Users ||--o{ Tools : "User can create many tools"
     Tools ||--o{ Images : "One tool has many images"
@@ -120,5 +125,6 @@ erDiagram
     Tools ||--o{ Tags : "Tools can have multiple tags"
     Images ||--o| Tags : "Images can have one tag"
     Promotions ||--o| Tags : "Promotions can have one tag"
+    Users ||--o| Roles : "Users can have one or more roles"
 
 ```

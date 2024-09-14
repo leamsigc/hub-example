@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+const isProd = process.env.NODE_ENV === "production";
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-07-30",
 
@@ -22,11 +24,32 @@ export default defineNuxtConfig({
     "nuxt-swiper",
     "@unlighthouse/nuxt",
     "@formkit/nuxt",
-    "@nuxt/image"
+    "@nuxt/image",
+    "nuxt-auth-utils",
+    "nuxt-security",
   ],
+  routeRules: {
+    "/api/me": {
+      security: {
+        rateLimiter: {
+          headers: false,
+          interval: 60 * 1000,
+          tokensPerInterval: 6,
+        },
+      },
+    },
+    "/api/_hub/**": {
+      csurf: false,
+    },
+    "/**": {
+      security: {
+        rateLimiter: false,
+      },
+    },
+  },
 
   hub: {
-    database: true,
+    database: false,
     kv: true,
     blob: true,
     cache: true,
@@ -38,6 +61,37 @@ export default defineNuxtConfig({
       // Enable Server API documentation within NuxtHub
       openAPI: true,
     },
+  },
+  security: {
+    csrf: true,
+    rateLimiter: {
+      driver: {
+        name: "cloudflare-kv-binding",
+        options: {
+          binding: "KV",
+        },
+      },
+    },
+    headers: {
+      contentSecurityPolicy: {
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://avatars.githubusercontent.com",
+          "https://static-cdn.jtvnw.net/",
+        ],
+        "script-src": [
+          "'self'",
+          "https",
+          "'nonce-{{nonce}}'",
+          "https://static.cloudflareinsights.com",
+        ],
+      },
+      crossOriginEmbedderPolicy: isProd ? "credentialless" : false,
+    },
+  },
+  csurf: {
+    methodsToProtect: ["POST", "PUT", "PATCH", "DELETE"],
   },
 
   // Development
@@ -82,6 +136,11 @@ export default defineNuxtConfig({
   content: {
     // ... options
     documentDriven: true,
+  },
+  eslint: {
+    config: {
+      stylistic: true,
+    },
   },
 
   typescript: {
