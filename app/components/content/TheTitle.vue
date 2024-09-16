@@ -11,12 +11,12 @@
  * @todo [✔] Update the typescript.
  */
 interface Props {
-  title: string;
-  subTitle: string;
-  description: string;
+  title: string
+  subTitle: string
+  description: string
 }
-const props = defineProps<Props>();
-const { title, subTitle, description } = toRefs(props);
+const props = defineProps<Props>()
+const { title, subTitle, description } = toRefs(props)
 </script>
 
 <template>
@@ -36,4 +36,5 @@ const { title, subTitle, description } = toRefs(props);
     </div>
   </div>
 </template>
+
 <style scoped></style>

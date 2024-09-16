@@ -1,13 +1,16 @@
-import { parseURL } from "ufo";
+import { parseURL } from 'ufo'
 
 export default eventHandler(async (event) => {
   // Skip during prerendering
-  if (import.meta.prerender) return;
+  // if (import.meta.prerender) return
 
-  const { pathname } = parseURL(event.path);
-  const redirects = await hubKV().get<{ [key: string]: string }>("redirects");
+  // const { pathname } = parseURL(event.path)
+  // const redirects: Record<string, string> | null = await hubKV().get('redirects')
 
-  if (redirects?.[pathname]) {
-    return sendRedirect(event, redirects[pathname]);
-  }
-});
+  // if (redirects?.[pathname]) {
+  //   return sendRedirect(event, redirects[pathname])
+  // }
+
+  // return
+
+})

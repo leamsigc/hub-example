@@ -1,64 +1,68 @@
 <script setup lang="ts">
-import { computed } from "vue";
+/**
+ * @credits @arashsheyda <https://github.com/arashsheyda>
+ */
 
-// inherited attrs can mess up the satori parser
-defineOptions({
-  inheritAttrs: false,
-});
+withDefaults(defineProps<{
+  title?: string
+  description?: string
+  bg?: string
+  icon?: string
+  logo?: string
+  image?: string
+  username?: string
+  socials?: { name: string, icon: string }[]
+}>(), {
+  bg: 'linear-gradient(to bottom right, #171717, #131313)',
+})
 
-const backgroundAttrs = {
-  style: {
-    display: "flex",
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    background: "rgba(5, 5, 5,1)",
-  },
-};
-
-const backgroundFlareAttrs = {
-  style: {
-    display: "flex",
-    position: "absolute",
-    right: "-50%",
-    top: "0%",
-    width: "200%",
-    height: "200%",
-    backgroundImage:
-      "radial-gradient(circle, rgba(0,220,130, 0.2) 0%,  rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5,0) 70%)",
-  },
-};
-
-const backgroundFlareTwoAttrs = {
-  style: {
-    display: "flex",
-    position: "absolute",
-    left: "-5%",
-    width: "150%",
-    height: "150%",
-    backgroundImage:
-      "radial-gradient(circle, rgba(0,123,220, 1) 0%,  rgba(5, 5, 5, 0.3) 50%, rgba(5, 5, 5,0) 70%)",
-  },
-};
-
-const siteConfig = useSiteConfig();
-const siteLogo = computed(() => {
-  return (
-    siteConfig.logo || "https://nuxt.com/assets/design-kit/logo/full-logo-green-light.png"
-  );
-});
+const config = useRuntimeConfig()
+const siteName = config.public.baseUrl
 </script>
 
 <template>
-  <div v-bind="backgroundAttrs" />
-  <div v-bind="backgroundFlareAttrs" />
-  <div v-bind="backgroundFlareTwoAttrs" />
-  <div class="w-full flex items-center justify-center h-full flex-row z-10">
+  <div
+    class="relative h-full w-full flex items-center justify-center bg-neutral-900 text-white border-2 border-white"
+    :style="{ backgroundImage: bg }"
+  >
+    <div
+      v-if="image"
+      class="absolute inset-0 w-full h-full bg-center opacity-10"
+      :style="{ backgroundImage: `url(${image})` }"
+    />
+    <div class="flex flex-col items-center text-center">
+      <h1 class="flex gap-4 text-7xl font-bold">
+        <Icon
+          v-if="icon"
+          :name="icon"
+        />
+        {{ title }}
+      </h1>
+      <p class="text-2xl max-w-3xl">
+        {{ description }}
+      </p>
+    </div>
+
     <img
-      v-if="siteLogo"
-      :src="siteLogo"
-      height="200"
-      class="rounded mr-5"
+      v-if="logo"
+      :src="logo"
+      class="absolute bottom-0 left-0 p-5"
+      style="height: 125px; width: 153px;"
     >
+    <div class="absolute bottom-5 right-5 flex gap-4">
+      <div
+        v-if="username"
+        class="absolute bottom-12 right-8 font-bold"
+      >
+        {{ username }}
+      </div>
+      <Icon
+        v-for="social of socials"
+        :key="social.name"
+        :name="social.icon!"
+        class="w-7 h-7"
+      />
+    </div>
+    <div>{{ siteName || "Null Title" }}</div>
   </div>
 </template>

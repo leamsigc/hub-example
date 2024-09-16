@@ -23,11 +23,11 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
 
 <template>
   <section class="relative">
-    <img
+    <NuxtImg
       :src="heroImageUrl"
-      class="absolute inset-0 h-full w-full hidden lg:block blur-3xl bg-blend-exclusion dark:bg-blend-darken"
+      class="absolute inset-0 h-full w-full hidden lg:block object-cover blur-3xl  bg-blend-exclusion dark:bg-blend-darken"
       :alt="alt"
-    >
+    />
     <div
       class="container mx-auto px-4 "
     >

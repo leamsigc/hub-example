@@ -38,6 +38,13 @@ head:
         -   name: 'twitter:description'
             content:  "Located in the heart of Huntsville, Alabama, Rosa Mexicana Cocina proudly brings the vibrant flavors and cultural heritage of Oaxaca, Mexico, to your table."
 
+path: /about
+ogImage:
+  component: BlogOgImage
+  props:
+    image: /blog/3-months-of-europe.png
+    readingMins: 5
+
 ---
 
 

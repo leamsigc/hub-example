@@ -37,9 +37,9 @@ head:
             content: "Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"
         -   name: 'twitter:description'
             content:  "Find the perfect baby name tailored to your preferences with NameNest! Explore unique, meaningful, and culturally significant baby names that match your style, values, and heritage."
+
 ---
-
-
+:OgImage{component="PageOg" image="https://red-onion-restaurant-41dbe.web.app/assets/Breakfast/breakfast3.png" title="Hello from the NameNest" description="Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"}
 
 ::Hero-component-secondary
 ---
@@ -53,18 +53,8 @@ subTitle: "We will give you the best names possible and Meaningful Names. Person
 
 <div class='my-20'></div>
 
-::TheTitle
----
-title: "Discover Your Perfect Baby Name with NameNest"
-sub-title: "Personalized Baby Name Suggestions Based on Your Preferences"
-description: "Get started with a couple sinple steps to find the perfect name for your baby."
-class: "mt-12"
----
+::TopTenTools
 ::
-
-
-
-
 
 ::div{.prose-lg .container .mx-auto  .p-4 .my-10}
 
