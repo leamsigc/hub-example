@@ -1,5 +1,5 @@
-import type { User, UserSessionRequired } from "#auth-utils";
 import type { H3Event } from "h3";
+import type { User, UserSessionRequired } from "#auth-utils";
 
 /**
  * Require a verified user session, throw a 401 error if the user is not verified
@@ -10,7 +10,7 @@ import type { H3Event } from "h3";
  */
 export async function requireVerifiedUserSession(
   event: H3Event,
-  opts: { statusCode?: number; message?: string } = {}
+  opts: { statusCode?: number, message?: string } = {},
 ): Promise<UserSessionRequired> {
   const userSession = await getUserSession(event);
 

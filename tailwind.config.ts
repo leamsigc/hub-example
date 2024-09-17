@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme"
-import animate from "tailwindcss-animate"
-
-
+import { fontFamily } from "tailwindcss/defaultTheme";
+import animate from "tailwindcss-animate";
 
 export default <Partial<Config>>{
   darkMode: "class",
@@ -37,11 +35,11 @@ export default <Partial<Config>>{
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0px" },
         },
-        fadeIn: {
+        "fadeIn": {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
-        fadeOut: {
+        "fadeOut": {
           from: { opacity: "1" },
           to: { opacity: "0" },
         },
@@ -57,8 +55,8 @@ export default <Partial<Config>>{
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        fadeIn: "fadeIn 0.2s ease-out",
-        fadeOut: "fadeOut 0.2s ease-out",
+        "fadeIn": "fadeIn 0.2s ease-out",
+        "fadeOut": "fadeOut 0.2s ease-out",
         "collapse-down": "collapse-down 0.2s ease-out",
         "collapse-up": "collapse-up 0.2s ease-out",
       },
@@ -100,6 +98,9 @@ export default <Partial<Config>>{
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require('@tailwindcss/typography'), animate],
-  content: [],
+  plugins: [require("@tailwindcss/typography"), animate],
+  content: [
+    "formkit.theme.ts",
+    "*.{vue,js,ts,jsx,tsx}",
+  ],
 };

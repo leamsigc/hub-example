@@ -50,6 +50,9 @@ dependencies:
   drizzle-orm:
     specifier: ^0.33.0
     version: 0.33.0(@libsql/client@0.11.0)
+  drizzle-zod:
+    specifier: ^0.5.1
+    version: 0.5.1(drizzle-orm@0.33.0)(zod@3.23.8)
   jszip:
     specifier: ^3.10.1
     version: 3.10.1
@@ -70,6 +73,9 @@ dependencies:
     version: 3.1.0(vue@3.5.5)
 
 devDependencies:
+  '@formkit/auto-animate':
+    specifier: ^0.8.2
+    version: 0.8.2
   '@formkit/nuxt':
     specifier: ^1.6.6
     version: 1.6.6(esbuild@0.21.5)(tailwindcss@3.4.10)(vite@5.4.5)(vue@3.5.5)(webpack@5.93.0)
@@ -1965,6 +1971,10 @@ packages:
       - '@vue/composition-api'
       - vue
     dev: false
+
+  /@formkit/auto-animate@0.8.2:
+    resolution: {integrity: sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==}
+    dev: true
 
   /@formkit/core@1.6.6:
     resolution: {integrity: sha512-UtvjxSHmU69FpOJPrE37buhpVSsIccwtnmEZz8HvXEFTeZa85WUATZnMWEV33Hzv9uUJrVikbEvXLfh30yjPsw==}
@@ -7047,6 +7057,16 @@ packages:
         optional: true
     dependencies:
       '@libsql/client': 0.11.0
+
+  /drizzle-zod@0.5.1(drizzle-orm@0.33.0)(zod@3.23.8):
+    resolution: {integrity: sha512-C/8bvzUH/zSnVfwdSibOgFjLhtDtbKYmkbPbUCq46QZyZCH6kODIMSOgZ8R7rVjoI+tCj3k06MRJMDqsIeoS4A==}
+    peerDependencies:
+      drizzle-orm: '>=0.23.13'
+      zod: '*'
+    dependencies:
+      drizzle-orm: 0.33.0(@libsql/client@0.11.0)
+      zod: 3.23.8
+    dev: false
 
   /duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}

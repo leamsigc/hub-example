@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 /**
  *
  * Component Description:Desc
@@ -11,27 +10,26 @@
  * @todo [ ] Integration test.
  * @todo [✔] Update the typescript.
  */
-const callToActions:[] = [
-  // {
-  //   name: "Login",
-  //   href: "#",
-  // },
-  // {
-  //   name: "Register",
-  //   href: "#",
-  //   variant: "outline",
-  // },
+const callToActions: [] = [
+  {
+    name: "Login",
+    href: "/login",
+  },
+  {
+    name: "Register",
+    href: "/register",
+    variant: "outline",
+  },
 ];
 
-const { data } = await useAsyncData('Navigation', () => queryContent('/').where({ _partial: true,title:"Navigation" }).findOne())
-
+const { data } = await useAsyncData("Navigation", () => queryContent("/").where({ _partial: true, title: "Navigation" }).findOne());
 </script>
 
 <template>
   <div
     class="min-h-screen flex flex-col "
   >
-  <UiToastToaster />
+    <UiToastToaster />
     <NavigationHeaderSecondary
       :call-to-action="callToActions"
       :menu="data.MenuLinks"
@@ -43,4 +41,5 @@ const { data } = await useAsyncData('Navigation', () => queryContent('/').where(
     <slot />
   </div>
 </template>
+
 <style scoped></style>
