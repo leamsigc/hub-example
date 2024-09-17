@@ -106,8 +106,8 @@ const handleSubmit = () => {
   <div>
     <UiCard
       class="mx-auto max-w-sm"
-      title="Profile"
-      description="Update your profile information below"
+      title="Create new tool"
+      description=""
     >
       <template #content>
         <UiCardContent
