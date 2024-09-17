@@ -2,18 +2,19 @@
 import type { MenuItem } from "@UI/types";
 
 interface Props {
-  logoLink?: { title: string; src: string; href: string };
+  logoLink?: { title: string, src: string, href: string }
 
-  menu: MenuItem[];
-  callToAction: MenuItem[];
-  shortLinks: MenuItem[];
+  menu: MenuItem[]
+  callToAction: MenuItem[]
+  shortLinks: MenuItem[]
 
-  notRequiredButItWillBeNiceTohave?: MenuItem[];
+  notRequiredButItWillBeNiceTohave?: MenuItem[]
 }
 
 const props = defineProps<Props>();
 const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
 </script>
+
 <template>
   <header class="z-20  bg-background/0 backdrop-blur sticky top-0">
     <UiContainer class="flex h-16 items-center justify-between lg:h-20">
@@ -23,10 +24,17 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
           class="hidden items-center justify-start gap-8 lg:flex"
         >
           <UiNavigationMenuList class="gap-2">
-            <UiNavigationMenuItem v-for="(data, link) in menu" :key="link">
+            <UiNavigationMenuItem
+              v-for="(data, link) in menu"
+              :key="link"
+            >
               <template v-if="!data.children">
                 <UiNavigationMenuLink as-child>
-                  <UiButton :to="data.href" variant="ghost" size="sm">
+                  <UiButton
+                    :to="data.href"
+                    variant="ghost"
+                    size="sm"
+                  >
                     {{ data.name }}
                   </UiButton>
                 </UiNavigationMenuLink>
@@ -48,7 +56,10 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
                         {{ item.name }}
                       </p>
                       <ul class="flex w-full flex-col gap-2">
-                        <li v-for="(child, k) in item.children" :key="k">
+                        <li
+                          v-for="(child, k) in item.children"
+                          :key="k"
+                        >
                           <UiNavigationMenuLink
                             class="data-[active]:bg-muted/80"
                             as-child
@@ -83,7 +94,11 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
           </UiNavigationMenuList>
         </UiNavigationMenu>
       </div>
-      <NuxtLink v-if="logoLink" :to="logoLink.href" class="flex items-center gap-3 mx-auto">
+      <NuxtLink
+        v-if="logoLink"
+        :to="logoLink.href"
+        class="flex items-center gap-3 mx-auto"
+      >
         <img
           v-if="logoLink.src"
           :src="logoLink.src"
@@ -96,24 +111,41 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
         >
         <span class="font-black lg:text-2xl">{{ logoLink.title }}</span>
       </NuxtLink>
-      <div >
+      <div class="mx-4">
         <slot />
       </div>
       <div class="lg:hidden">
         <UiSheet>
           <UiSheetTrigger as-child>
-            <UiButton variant="ghost" size="icon-sm" name="Mobile menu" title="Mobile menu">
-              <Icon name="lucide:menu" class="h-5 w-5" />
+            <UiButton
+              variant="ghost"
+              size="icon-sm"
+              name="Mobile menu"
+              title="Mobile menu"
+            >
+              <Icon
+                name="lucide:menu"
+                class="h-5 w-5"
+              />
             </UiButton>
             <UiSheetContent class="w-[90%] p-0">
               <template #content>
-                <UiSheetTitle class="sr-only" title="Mobile menu" />
-                <UiSheetDescription class="sr-only" description="Mobile menu" />
+                <UiSheetTitle
+                  class="sr-only"
+                  title="Mobile menu"
+                />
+                <UiSheetDescription
+                  class="sr-only"
+                  description="Mobile menu"
+                />
                 <UiSheetX class="z-20" />
 
                 <UiScrollArea class="h-full p-5">
                   <div class="flex flex-col gap-2">
-                    <template v-for="(item, index) in menu" :key="index">
+                    <template
+                      v-for="(item, index) in menu"
+                      :key="index"
+                    >
                       <UiButton
                         v-if="!item.children"
                         variant="ghost"
@@ -148,7 +180,10 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
                               {{ menuLink.name }}
                             </p>
                             <ul class="flex w-full flex-col gap-2">
-                              <li v-for="(child, k) in menuLink.children" :key="k">
+                              <li
+                                v-for="(child, k) in menuLink.children"
+                                :key="k"
+                              >
                                 <UiNavigationMenuLink
                                   class="data-[active]:bg-muted/80"
                                   as-child
@@ -179,8 +214,14 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
                     <UiGradientDivider class="my-5" />
 
                     <ul class="grid grid-cols-2 gap-x-3 gap-y-5 px-4">
-                      <li v-for="(m, j) in shortLinks" :key="j">
-                        <NuxtLink class="py-2" :to="m.href">
+                      <li
+                        v-for="(m, j) in shortLinks"
+                        :key="j"
+                      >
+                        <NuxtLink
+                          class="py-2"
+                          :to="m.href"
+                        >
                           {{ m.name }}
                         </NuxtLink>
                       </li>

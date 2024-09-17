@@ -1,7 +1,7 @@
 ---
 layout: "default"
 navLabel: 'HOME'
-title: Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names
+title: Discover Tools For YouTube| The best tools to get started with Youtube
 description: Find the perfect baby name tailored to your preferences with NameNest! Explore unique, meaningful, and culturally significant baby names that match your style, values, and heritage.
 draft: false
 navigation: true
@@ -18,11 +18,11 @@ head:
         class: ''
     meta:
         -   name: 'keywords'
-            content:  "Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"
+            content:  "Discover Tools For YouTube| The best tools to get started with Youtube"
         -   name: 'robots'
             content: 'index, follow'
         -   name: 'author'
-            content: "Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"
+            content: "Discover Tools For YouTube| The best tools to get started with Youtube"
         -   name: 'description'
             content:  "Find the perfect baby name tailored to your preferences with NameNest! Explore unique, meaningful, and culturally significant baby names that match your style, values, and heritage."
         -   name: 'og:image'
@@ -30,24 +30,25 @@ head:
         -   name: 'twitter:image'
             content: '/logo.png'
         -   name: 'twitter:title'
-            content: "Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"
+            content: "Discover Tools For YouTube| The best tools to get started with Youtube"
         -   name: 'twitter:card'
             content: "summary_large_image"
         -   name: 'twitter:title'
-            content: "Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"
+            content: "Discover Tools For YouTube| The best tools to get started with Youtube"
         -   name: 'twitter:description'
             content:  "Find the perfect baby name tailored to your preferences with NameNest! Explore unique, meaningful, and culturally significant baby names that match your style, values, and heritage."
 
 ---
-:OgImage{component="PageOg" image="https://red-onion-restaurant-41dbe.web.app/assets/Breakfast/breakfast3.png" title="Hello from the NameNest" description="Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"}
+:OgImage{component="PageOg" image="https://red-onion-restaurant-41dbe.web.app/assets/Breakfast/breakfast3.png" title="Hello from the NameNest" description="Discover Tools For YouTube| The best tools to get started with Youtube"}
 
 ::Hero-component-secondary
 ---
-alt: "Personalized Baby base on your Unique life experience, We will give you the best names possible and Meaningful Names"
+alt: "Discover Tools For YouTube| The best tools to get started with Youtube"
 heroImageUrl: /baby.webp
-title: "NameNest: Personalized Baby base on your Unique life experience"
-href: "tel:+1-256-559-5900"
-subTitle: "We will give you the best names possible and Meaningful Names. Personalized Baby Name Suggestions Based on Your Preferences"
+title: "Discover Tools For YouTube"
+href: "/tools"
+subTitle: "Explore our curated collection of tools for creators, from video editing and analytics to AI tools, designed to enhance your channel and streamline your workflow."
+callToActionText: "Explore Tools"
 ---
 ::
 

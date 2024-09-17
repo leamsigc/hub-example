@@ -10,7 +10,7 @@
  * @todo [ ] Integration test.
  * @todo [✔] Update the typescript.
  */
-const callToActions: [] = [
+const callToActions = [
   {
     name: "Login",
     href: "/login",
@@ -27,14 +27,15 @@ const { data } = await useAsyncData("Navigation", () => queryContent("/").where(
 
 <template>
   <div
-    class="min-h-screen flex flex-col "
+    class=" flex flex-col dark:bg-neutral-950 dark:text-slate-400 min-h-svh"
   >
     <UiToastToaster />
     <NavigationHeaderSecondary
+      v-if="data"
       :call-to-action="callToActions"
       :menu="data.MenuLinks"
       :short-links="data.ShortLinks"
-      :logo-link="{ title: 'Baby names', href: '/', src: '' }"
+      :logo-link="{ title: 'Best youtube tools', href: '/', src: '' }"
     >
       <ThemeSwitcher />
     </NavigationHeaderSecondary>

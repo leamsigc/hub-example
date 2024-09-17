@@ -11,21 +11,24 @@
  * @todo [✔] Update the typescript.
  */
 interface Props {
-  alt: string;
-  heroImageUrl: string;
-  title: string;
-  subTitle: string;
-  href: string;
+  alt: string
+  heroImageUrl: string
+  title: string
+  subTitle: string
+  href: string
+  callToActionText?: string
 }
-const props = defineProps<Props>();
-const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
+const props = withDefaults(defineProps<Props>(), {
+  callToActionText: "Learn more",
+});
+const { alt, heroImageUrl, subTitle, title, href, callToActionText } = toRefs(props);
 </script>
 
 <template>
   <section class="relative">
     <NuxtImg
       :src="heroImageUrl"
-      class="absolute inset-0 h-full w-full hidden lg:block object-cover blur-3xl  bg-blend-exclusion dark:bg-blend-darken"
+      class="absolute inset-0 h-full w-full hidden lg:block object-cover blur-3xl  bg-blend-exclusion dark:bg-transparent dark:bg-blend-exclusion dark:opacity-35"
       :alt="alt"
     />
     <div
@@ -45,10 +48,14 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
                   v-html="subTitle"
                 />
               </h1>
-              <UiButton class="px-16 py-6 rounded-full" variant="outline" :href="href">
+              <UiButton
+                class="px-16 py-6 rounded-full"
+                variant="outline"
+                :href="href"
+              >
                 <slot>
                   <span class="mr-5 inline-block">
-                    Start Your Baby Name Journey Now
+                    {{ callToActionText }}
                   </span>
                 </slot>
               </UiButton>
@@ -59,4 +66,5 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
     </div>
   </section>
 </template>
+
 <style scoped></style>
