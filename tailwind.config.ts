@@ -3,7 +3,7 @@ import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import animate from "tailwindcss-animate";
 
-export default <Partial<Config>>{
+export default <Partial<Config>><unknown>{
   darkMode: "class",
   theme: {
     extend: {
@@ -27,6 +27,23 @@ export default <Partial<Config>>{
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        "meteor": {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: 1 },
+          "70%": { opacity: 1 },
+          "100%": {
+            transform: "rotate(215deg) translateX(-500px)",
+            opacity: 0,
+          },
+        },
+        "grid": {
+          "0%": { transform: "translateY(-50%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        "border-beam": {
+          "100%": {
+            "offset-distance": "100%",
+          },
+        },
         "accordion-down": {
           from: { height: "0px" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -53,6 +70,9 @@ export default <Partial<Config>>{
         },
       },
       animation: {
+        "meteor": "meteor 5s linear infinite",
+        "grid": "grid 15s linear infinite",
+        "border-beam": "border-beam calc(var(--duration)*1s) infinite linear",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fadeIn": "fadeIn 0.2s ease-out",
@@ -95,6 +115,54 @@ export default <Partial<Config>>{
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      typography: ({ theme }) => ({
+        DEFAULT: {
+          css: {
+            "--tw-prose-body": theme("colors.foreground"),
+            "--tw-prose-headings": theme("colors.foreground"),
+            "--tw-prose-lead": theme("colors.muted.foreground"),
+            "--tw-prose-links": theme("colors.foreground"),
+            "--tw-prose-bold": theme("colors.foreground"),
+            "--tw-prose-counters": theme("colors.muted.foreground"),
+            "--tw-prose-bullets": theme("colors.primary.DEFAULT / 50%"),
+            "--tw-prose-hr": theme("colors.border"),
+            "--tw-prose-quotes": theme("colors.foreground"),
+            "--tw-prose-quote-borders": theme("colors.border"),
+            "--tw-prose-captions": theme("colors.muted.foreground"),
+            "--tw-prose-kbd": theme("colors.foreground"),
+            "--tw-prose-kbd-shadows": theme("colors.foreground"),
+            "--tw-prose-code": theme("colors.foreground"),
+            "--tw-prose-pre-code": theme("colors.background"),
+            "--tw-prose-pre-bg": theme("colors.foreground / 90%"),
+            "--tw-prose-th-borders": theme("colors.border"),
+            "--tw-prose-td-borders": theme("colors.border"),
+            "--tw-prose-invert-body": theme("colors.foreground"),
+            "--tw-prose-invert-headings": theme("colors.foreground"),
+            "--tw-prose-invert-lead": theme("colors.muted.foreground"),
+            "--tw-prose-invert-links": theme("colors.foreground"),
+            "--tw-prose-invert-bold": theme("colors.foreground"),
+            "--tw-prose-invert-counters": theme("colors.muted.foreground"),
+            "--tw-prose-invert-bullets": theme("colors.primary.DEFAULT / 50%"),
+            "--tw-prose-invert-hr": theme("colors.border"),
+            "--tw-prose-invert-quotes": theme("colors.foreground"),
+            "--tw-prose-invert-quote-borders": theme("colors.border"),
+            "--tw-prose-invert-captions": theme("colors.muted.foreground"),
+            "--tw-prose-invert-kbd": theme("colors.foreground"),
+            "--tw-prose-invert-kbd-shadows": theme("colors.foreground"),
+            "--tw-prose-invert-code": theme("colors.foreground"),
+            "--tw-prose-invert-pre-code": theme("colors.foreground"),
+            "--tw-prose-invert-pre-bg": theme("colors.foreground / 10%"),
+            "--tw-prose-invert-th-borders": theme("colors.border"),
+            "--tw-prose-invert-td-borders": theme("colors.border"),
+            "code::before": {
+              content: "",
+            },
+            "code::after": {
+              content: "",
+            },
+          },
+        },
+      }),
     },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports

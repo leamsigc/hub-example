@@ -1,6 +1,9 @@
 <template>
   <UiToastProvider>
-    <template v-for="toast in toasts" :key="toast.id">
+    <template
+      v-for="toast in toasts"
+      :key="toast.id"
+    >
       <UiToast v-bind="toast">
         <div class="flex gap-3">
           <Icon
@@ -10,7 +13,10 @@
             :class="[!!toast.title && !!toast.description && 'mt-0.5']"
           />
           <div class="flex flex-col gap-1">
-            <UiToastTitle v-if="toast.title" :title="toast.title" />
+            <UiToastTitle
+              v-if="toast.title"
+              :title="toast.title"
+            />
             <template v-if="toast.description">
               <UiToastDescription v-if="isVNode(toast.description)">
                 <component :is="toast.description" />
@@ -30,9 +36,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { isVNode } from "vue";
+import { isVNode } from "vue";
 
-  const { toasts } = useToast();
+const { toasts } = useToast();
 </script>
 
 <style>
