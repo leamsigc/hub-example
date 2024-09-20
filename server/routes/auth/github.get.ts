@@ -5,6 +5,8 @@ export default oauthGitHubEventHandler({
   async onSuccess(event, { user: oauthUser, tokens }) {
     const { user: userSession } = await getUserSession(event);
 
+    console.log("User session", userSession);
+
     // If the user is already signed in, link the account
     if (userSession?.id) {
       const user = await findUserById(userSession.id);
@@ -26,6 +28,8 @@ export default oauthGitHubEventHandler({
     // If the user is not signed in, search for an existing user with that GitHub ID
     // If it exists, sign in as that user and refresh the token
     let user = await findUserByGitHubId(oauthUser.id);
+    console.log("User from the db");
+    console.log(user);
 
     if (user) {
       await updateUser(user.id, {
@@ -48,7 +52,7 @@ export default oauthGitHubEventHandler({
     // If the user is not signed in, search for an existing user with that email address without a GitHub ID
     // If it exists, tells the user to sign in with that account and link the GitHub account
     user = await findUserBy(
-      and(eq(tables.users.email, oauthUser.email), isNull(tables.users.githubId))
+      and(eq(tables.users.email, oauthUser.email), isNull(tables.users.githubId)),
     );
 
     if (user) {
@@ -60,10 +64,14 @@ export default oauthGitHubEventHandler({
         {
           message:
             "An existing account for this email already exists. Please login and visit your profile settings to add support for GitHub authentication.",
-        }
+        },
       );
       return sendRedirect(event, "/login");
     }
+
+    console.log("======================");
+    console.log("Create user:");
+    console.log("oauthUser", oauthUser);
 
     // If the user is not signed in and no user exists with that GitHub ID or email address, create a new user
     const createdUser = await createUser({
@@ -83,6 +91,9 @@ export default oauthGitHubEventHandler({
       verifiedAt: createdUser.verifiedAt,
       githubId: oauthUser.id,
     });
+
+    console.log("Created user");
+    console.log(createdUser);
 
     return sendRedirect(event, "/profile");
   },

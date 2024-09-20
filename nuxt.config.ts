@@ -1,15 +1,8 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 const isProd = process.env.NODE_ENV === "production";
 
 export default defineNuxtConfig({
   compatibilityDate: "2024-07-30",
-
-  // Nuxt 4 directory structure and features
-  // https://nuxt.com/docs/getting-started/upgrade#testing-nuxt-4
   future: { compatibilityVersion: 4 },
-
-  // Nuxt Modules
-  // https://nuxt.com/modules
   modules: ["@nuxtjs/tailwindcss", "@nuxt/content", "@nuxthub/core", "@nuxt/eslint", "@nuxtjs/color-mode", "@vueuse/nuxt", "@nuxt/icon", "@samk-dev/nuxt-vcalendar", "@vee-validate/nuxt", "@nuxtjs/seo", "nuxt-swiper", "@unlighthouse/nuxt", "@formkit/nuxt", "@nuxt/image", "nuxt-auth-utils", "nuxt-security", "@formkit/auto-animate"],
   routeRules: {
     "/api/me": {
@@ -80,8 +73,13 @@ export default defineNuxtConfig({
   // Development
   devtools: { enabled: true },
 
+  css: [
+    "./assets/css/global.css",
+  ],
   tailwindcss: {
     exposeConfig: true,
+    editorSupport: true,
+    cssPath: ["~/assets/css/tailwind.css", { injectPosition: "last" }],
   },
 
   colorMode: {
@@ -102,20 +100,6 @@ export default defineNuxtConfig({
     ],
   },
 
-  app: {
-    head: {
-      script: [
-        {
-          src: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.9/pdfmake.min.js",
-          defer: true,
-        },
-        {
-          src: "https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.9/vfs_fonts.min.js",
-          defer: true,
-        },
-      ],
-    },
-  },
   content: {
     // ... options
     documentDriven: true,

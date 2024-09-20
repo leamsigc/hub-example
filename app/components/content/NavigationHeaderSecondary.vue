@@ -13,6 +13,18 @@ interface Props {
 
 const props = defineProps<Props>();
 const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
+
+const { $csrfFetch } = useNuxtApp();
+const { session, user } = useUserSession();
+const logout = async () => {
+  await $csrfFetch("/api/_auth/session", {
+    method: "DELETE",
+  });
+
+  session.value = {};
+
+  await navigateTo("/");
+};
 </script>
 
 <template>
@@ -244,13 +256,24 @@ const { logoLink, menu, callToAction, shortLinks } = toRefs(props);
         </UiSheet>
       </div>
       <div class="hidden items-center gap-3 lg:flex">
-        <UiButton
+        <template
           v-for="link in callToAction"
           :key="link.name"
-          :to="link.href"
-          :variant="link.variant"
         >
-          {{ link.name }}
+          <UiButton
+            v-if="!session.user"
+            :to="link.href"
+            :variant="link.variant"
+          >
+            {{ link.name }}
+          </UiButton>
+        </template>
+        <UiButton
+          v-if="user && session.user"
+          variant="ghost"
+          @click="logout"
+        >
+          Logout
         </UiButton>
       </div>
     </UiContainer>

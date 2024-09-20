@@ -1,5 +1,5 @@
-import { sql } from "drizzle-orm";
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { relations, sql } from "drizzle-orm";
+import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -19,17 +19,22 @@ export const users = sqliteTable("users", {
     .notNull()
     .$defaultFn(() => sql`(current_timestamp)`)
     .$onUpdateFn(() => sql`(current_timestamp)`),
-});
-export const userRoles = sqliteTable("user_roles", {
-  userId: integer("user_id").references(() => users.id),
-  roleId: integer("role_id").references(() => roles.id),
-});
+}, user => ({
+  compoundKey: primaryKey({ columns: [user.email, user.id] }),
+}));
 
 export const roles = sqliteTable("roles", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   label: text("label").notNull(),
   name: text("name").notNull(),
 });
+
+export const usersRoles = relations(users, ({ many }) => ({
+  roles: many(roles),
+}));
+export const rolesRelations = relations(roles, ({ many }) => ({
+  users: many(users),
+}));
 
 export const tools = sqliteTable("tools", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -45,6 +50,9 @@ export const toolsTags = sqliteTable("tools_tags", {
   toolId: integer("tool_id").references(() => tools.id),
   tagId: integer("tag_id").references(() => tags.id),
 });
+export const toolsRelations = relations(tools, ({ many }) => ({
+  tags: many(tags),
+}));
 
 export const toolsCategories = sqliteTable("tools_categories", {
   toolId: integer("tool_id").references(() => tools.id),

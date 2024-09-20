@@ -1,5 +1,3 @@
-@import url("https://rsms.me/inter/inter.css");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -49,9 +47,6 @@
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
   }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
@@ -99,4 +94,8 @@ pre {
   max-height: 400px;
   scrollbar-width: thin;
   scrollbar-color: theme("colors.muted.DEFAULT") theme("colors.background");
+}
+
+:root {
+  --base-item: #fefefe;
 }

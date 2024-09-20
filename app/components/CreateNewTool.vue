@@ -25,45 +25,64 @@
  */
 import { z } from "zod";
 
-const { handleSubmit } = useForm({
-  validationSchema: toTypedSchema(
-    z.object({
-      name: z.string().min(1, "Please enter a name."),
-      url: z.string().min(1, "Please enter a url."),
-      description: z.string().min(1, "Please enter a description."),
-      tags: z.string().min(1, "Please enter at least one tag."),
-      pricing: z.string().min(1, "Please select a pricing."),
-      image: z.string().min(1, "Please enter a image url."),
-      categories: z.string().min(1, "Please enter at least one category."),
-      likes: z.string().min(1, "Please enter at least one like."),
-    }),
-  ) });
+import * as zod from "zod";
+
+const validationSchema = toTypedSchema(
+  zod.object({
+    name: z.string().min(1, "Please enter a name."),
+    url: z.string().min(1, "Please enter a url."),
+    description: z.string().min(1, "Please enter a description."),
+    tags: z.array(z.string()).min(1, "Please enter at least one tags."),
+    pricing: z.string().min(1, "Please select a pricing."),
+    image: z.string().min(1, "Please enter a image url."),
+    categories: z.string().min(1, "Please enter at least one category."),
+    likes: z.number().min(1, "Please enter at least one like."),
+  }),
+);
+
+const { handleSubmit, errors, setFieldValue } = useForm({ validationSchema });
+const cardIsPending = ref(false);
 
 const onSubmit = handleSubmit((values) => {
-  // Send request to server
   console.log(values);
+  console.log("Request to create new tool ");
+
+  // Send request to server
+  cardIsPending.value = true;
+
+  const { status } = useFetch("/api/tools", {
+    method: "PUT",
+    body: values,
+  });
+  if (status.value === "success") {
+    closeDialog(true);
+  }
+  else {
+    closeDialog(false);
+  }
 });
 
-const data = ref<{
-  name: string
-  url: string
-  description: string
-  tags: string[]
-  pricing: "basic" | "premium" | "freemium"
-  likes: string
-  categories: string
-  image?: string
-}>({ name: "", url: "", description: "", tags: [], pricing: "basic", likes: "", categories: "", image: "/baby.webp" });
+const { value: name } = useField<string>("name");
+const { value: url } = useField<string>("url");
+const { value: description } = useField<string>("description");
+const { value: tags } = useField<string[]>("tags");
+const { value: pricing } = useField<"basic" | "premium" | "freemium">("pricing");
+const { value: likes } = useField("likes");
+const { value: categories } = useField<string>("categories");
+const { value: image } = useField<string>("image");
+
+setFieldValue("image", "/baby.webp");
 
 const dialog = ref(false);
 
 const closeDialog = (save: boolean) => {
   useToast().toast({
-    title: save ? "Profile updated" : "Changes discarded",
+    title: save ? "Created new tool successfully" : "Tool can't be created",
     description: `Your changes has been ${save ? "saved" : "discarded"}.`,
     duration: 5000,
     icon: save ? "lucide:check" : "lucide:x",
   });
+  cardIsPending.value = false;
   dialog.value = false;
 };
 const categoriesOptions = ["Ai", "Image", "Video"];
@@ -86,9 +105,30 @@ const categoriesOptions = ["Ai", "Image", "Video"];
         <template #content>
           <section class="grid grid-cols-2 gap-4">
             <UiCardContent
+              v-if="cardIsPending"
+              class="grid gap-4 py-4"
+            >
+              <div
+                class="grid grid-cols-4 items-center gap-4"
+              >
+                <div class="flex items-center space-x-4">
+                  <UiSkeleton class="h-12 w-12 rounded-full" />
+                  <div class="space-y-2">
+                    <UiSkeleton class="h-4 w-[450px]" />
+                    <UiSkeleton class="h-4 w-[200px]" />
+                    <UiSkeleton class="h-4 w-[640px]" />
+                    <UiSkeleton class="h-4 w-[500px]" />
+                    <UiSkeleton class="h-4 w-[400px]" />
+                    <UiSkeleton class="h-4 w-[200px]" />
+                  </div>
+                </div>
+              </div>
+            </UiCardContent>
+            <UiCardContent
+              v-else
+              v-auto-animate
               as="form"
               class="grid gap-4 py-4"
-              @submit="onSubmit"
             >
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -102,7 +142,8 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                   class="col-span-3 w-full"
                 >
                   <UiSelect
-                    v-model="data.categories"
+                    v-model="categories"
+                    name="categories"
                   >
                     <UiSelectTrigger placeholder="Select an option" />
                     <UiSelectContent class="bg-white rounded">
@@ -119,6 +160,12 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                     </UiSelectContent>
                   </UiSelect>
                 </div>
+                <div
+                  v-if="errors.categories"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.categories }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -129,11 +176,18 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiLabel>
                 <UiInput
                   id="name"
-                  v-model="data.name"
+                  v-model="name"
+                  name="name"
                   required
                   class="col-span-3"
                   placeholder="Tool name..."
                 />
+                <div
+                  v-if="errors.name"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.name }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -144,11 +198,19 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiLabel>
                 <UiInput
                   id="image"
-                  v-model="data.image"
+                  v-model="image"
+                  name="image"
                   required
                   class="col-span-3"
                   placeholder="Tool image url..."
                 />
+
+                <div
+                  v-if="errors.image"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.image }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -159,11 +221,19 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiLabel>
                 <UiInput
                   id="url"
-                  v-model="data.url"
+                  v-model="url"
+                  name="url"
                   required
                   class="col-span-3"
                   placeholder="Tool url..."
                 />
+
+                <div
+                  v-if="errors.url"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.url }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -174,11 +244,19 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiLabel>
                 <UiTextarea
                   id="description"
-                  v-model="data.description"
+                  v-model="description"
+                  name="description"
                   class="col-span-3"
                   placeholder="Tool description..."
                   type="textarea"
                 />
+
+                <div
+                  v-if="errors.description"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.description }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -189,17 +267,25 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiLabel>
                 <UiTagsInput
                   id="tags"
-                  v-model="data.tags"
+                  v-model="tags"
+                  name="tags"
                   class="col-span-3"
                 >
                   <UiTagsInputItem
-                    v-for="tag in data.tags"
+                    v-for="tag in tags"
                     :key="tag"
                     :value="tag"
                   />
                   <UiTagsInputField placeholder="Add a tag..." />
                   <UiTagsInputClear />
                 </UiTagsInput>
+
+                <div
+                  v-if="errors.tags"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.tags }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -212,7 +298,8 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                   class="col-span-3 w-full"
                 >
                   <UiSelect
-                    v-model="data.pricing"
+                    v-model="pricing"
+                    name="pricing"
                   >
                     <UiSelectTrigger placeholder="Select an option" />
                     <UiSelectContent class="bg-white rounded">
@@ -228,6 +315,12 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                     </UiSelectContent>
                   </UiSelect>
                 </div>
+                <div
+                  v-if="errors.pricing"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.pricing }}
+                </div>
               </div>
               <div class="grid grid-cols-4 items-center gap-4">
                 <UiLabel
@@ -238,12 +331,20 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiLabel>
                 <UiInput
                   id="likes"
-                  v-model="data.likes"
+                  v-model="likes"
+                  name="likes"
                   required
                   class="col-span-3"
                   placeholder="Tool likes..."
                   type="number"
                 />
+
+                <div
+                  v-if="errors.likes"
+                  class="text-red-500 text-center col-span-4"
+                >
+                  {{ errors.likes }}
+                </div>
               </div>
               <div class="grid grid-cols-2 items-center gap-4">
                 <UiButton
@@ -256,19 +357,21 @@ const categoriesOptions = ["Ai", "Image", "Video"];
                 </UiButton>
                 <UiButton
                   type="submit"
+                  @click="onSubmit"
                 >
                   Save
                 </UiButton>
+                {{ JSON.stringify(errors) }}
               </div>
             </UiCardContent>
             <section class="min-w-96 flex justify-center items-center">
               <SingleCard
-                :type="data.pricing"
-                :image="data.image"
-                :title="data.name"
-                :description="data.description"
-                :category="data.categories"
-                :tags="data.tags"
+                :type="pricing"
+                :image="image"
+                :title="name"
+                :description="description"
+                :category="categories"
+                :tags="tags"
               />
             </section>
           </section>
