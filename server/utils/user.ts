@@ -1,5 +1,5 @@
 import type { SQL } from "drizzle-orm";
-import type { UserInsert } from "~~/server/utils/drizzle";
+import type { UserInsert, UserInsertWithRole } from "~~/server/utils/drizzle";
 
 export async function findUserById(userId: number) {
   return useDrizzle().select().from(tables.users).where(eq(tables.users.id, userId)).get();
@@ -17,7 +17,7 @@ export async function findUserBy(query: SQL | undefined) {
   return useDrizzle().select().from(tables.users).where(query).get();
 }
 
-export async function createUser(user: UserInsert) {
+export async function createUser(user: UserInsertWithRole) {
   const createdUser = await useDrizzle()
     .insert(tables.users)
     .values(user)
@@ -29,11 +29,14 @@ export async function createUser(user: UserInsert) {
       verifiedAt: tables.users.verifiedAt,
     })
     .get();
-
-  await useDrizzle().insert(tables.userRoles).values({
-    roleId: 1,
-    userId: createdUser.id,
-  });
+  if (user.roles && user.roles.length > 0) {
+    await useDrizzle().insert(tables.userRoles).values(
+      user.roles.map(roleId => ({
+        userId: createdUser.id,
+        roleId: roleId,
+      })),
+    );
+  }
 
   return createdUser;
 }

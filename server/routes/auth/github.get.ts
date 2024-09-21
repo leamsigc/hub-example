@@ -81,6 +81,7 @@ export default oauthGitHubEventHandler({
       githubId: oauthUser.id as number,
       githubToken: tokens.access_token as string,
       verifiedAt: new Date().toUTCString(),
+      roles: [1],
     });
 
     await updateUserSession(event, {

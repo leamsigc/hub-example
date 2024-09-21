@@ -1,5 +1,5 @@
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
-import { sqliteTable, text, integer, primaryKey } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -12,58 +12,42 @@ export const users = sqliteTable("users", {
   twitchId: text("twitch_id").unique(),
   twitchToken: text("twitch_token"),
   verifiedAt: text("verified_at"),
-  createdAt: text("created_at")
-    .notNull()
-    .$defaultFn(() => sql`(current_timestamp)`),
-  updatedAt: text("updated_at")
-    .notNull()
-    .$defaultFn(() => sql`(current_timestamp)`)
-    .$onUpdateFn(() => sql`(current_timestamp)`),
-}, user => ({
-  compoundKey: primaryKey({ columns: [user.email, user.id] }),
-}));
-
-export const roles = sqliteTable("roles", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  label: text("label").notNull(),
-  name: text("name").notNull(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
-
-export const usersRoles = relations(users, ({ many }) => ({
-  roles: many(roles),
-}));
-export const rolesRelations = relations(roles, ({ many }) => ({
-  users: many(users),
+// Remove
+export const usersRelations = relations(users, ({ many }) => ({
+  tools: many(tools),
+  userRoles: many(userRoles),
 }));
 
 export const tools = sqliteTable("tools", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  url: text("url").notNull(),
-  name: text("name").notNull(),
+  url: text("url"),
   description: text("description"),
   likes: integer("likes"),
   tags: text("tags"),
   pricing: text("pricing"),
-});
-
-export const toolsTags = sqliteTable("tools_tags", {
-  toolId: integer("tool_id").references(() => tools.id),
-  tagId: integer("tag_id").references(() => tags.id),
-});
-export const toolsRelations = relations(tools, ({ many }) => ({
-  tags: many(tags),
-}));
-
-export const toolsCategories = sqliteTable("tools_categories", {
-  toolId: integer("tool_id").references(() => tools.id),
+  imageUrl: text("image_url"),
+  userId: integer("user_id").references(() => users.id),
   categoryId: integer("category_id").references(() => categories.id),
 });
-export const images = sqliteTable("images", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  toolId: integer("tool_id").references(() => tools.id),
-  url: text("url").notNull(),
-  tag: text("tag"),
-});
+
+// Remove
+export const toolsRelations = relations(tools, ({ one, many }) => ({
+  user: one(users, {
+    fields: [tools.userId],
+    references: [users.id],
+  }),
+  category: one(categories, {
+    fields: [tools.categoryId],
+    references: [categories.id],
+  }),
+  promotion: one(promotions),
+  stats: one(stats),
+  images: many(images),
+  toolTags: many(toolTags),
+}));
 
 export const promotions = sqliteTable("promotions", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -72,16 +56,23 @@ export const promotions = sqliteTable("promotions", {
   to: text("to"),
   tag: text("tag"),
 });
+// Remove
+export const promotionsRelations = relations(promotions, ({ one }) => ({
+  tool: one(tools, {
+    fields: [promotions.toolId],
+    references: [tools.id],
+  }),
+}));
+
 export const tags = sqliteTable("tags", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
+  name: text("name"),
   label: text("label"),
 });
-export const categories = sqliteTable("categories", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
-  name: text("name").notNull(),
-  label: text("label"),
-});
+// Remove
+export const tagsRelations = relations(tags, ({ many }) => ({
+  toolTags: many(toolTags),
+}));
 
 export const stats = sqliteTable("stats", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -90,3 +81,81 @@ export const stats = sqliteTable("stats", {
   clicks: integer("clicks"),
   likes: integer("likes"),
 });
+
+// Remove
+export const statsRelations = relations(stats, ({ one }) => ({
+  tool: one(tools, {
+    fields: [stats.toolId],
+    references: [tools.id],
+  }),
+}));
+
+export const images = sqliteTable("images", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  toolId: integer("tool_id").references(() => tools.id),
+  url: text("url"),
+  tag: text("tag"),
+});
+// Remove
+export const imagesRelations = relations(images, ({ one }) => ({
+  tool: one(tools, {
+    fields: [images.toolId],
+    references: [tools.id],
+  }),
+}));
+
+export const roles = sqliteTable("roles", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+  label: text("label"),
+});
+// Remove
+export const rolesRelations = relations(roles, ({ many }) => ({
+  userRoles: many(userRoles),
+}));
+
+export const categories = sqliteTable("categories", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name"),
+  description: text("description"),
+});
+// Remove
+export const categoriesRelations = relations(categories, ({ many }) => ({
+  tools: many(tools),
+}));
+
+// Many-to-many relationship between users and roles
+export const userRoles = sqliteTable("user_roles", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  userId: integer("user_id").references(() => users.id),
+  roleId: integer("role_id").references(() => roles.id),
+});
+// Remove
+export const userRolesRelations = relations(userRoles, ({ one }) => ({
+  user: one(users, {
+    fields: [userRoles.userId],
+    references: [users.id],
+  }),
+  role: one(roles, {
+    fields: [userRoles.roleId],
+    references: [roles.id],
+  }),
+}));
+// Many-to-many relationship between tools and tags
+export const toolTags = sqliteTable("tool_tags", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  toolId: integer("tool_id").references(() => tools.id),
+  tagId: integer("tag_id").references(() => tags.id),
+});
+
+// Remove
+export const toolTagsRelations = relations(toolTags, ({ one }) => ({
+  tool: one(tools, {
+    fields: [toolTags.toolId],
+    references: [tools.id],
+  }),
+  tag: one(tags, {
+    fields: [toolTags.tagId],
+    references: [tags.id],
+  }),
+}));

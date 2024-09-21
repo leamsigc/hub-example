@@ -81,6 +81,7 @@ erDiagram
       int likes
       text tags
       text pricing
+      text image_url
     }
 
     Promotions {

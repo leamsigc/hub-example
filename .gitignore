@@ -24,3 +24,4 @@ logs
 !.env.example
 .unlighthouse
 *.db
+local.db-*
