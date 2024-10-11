@@ -11,12 +11,10 @@
  * @todo [✔] Update the typescript.
  */
 import { ConfigProvider } from "radix-vue";
-
-const useIdFunction = () => useId() as string;
 </script>
 
 <template>
-  <ConfigProvider :use-id="useIdFunction">
+  <ConfigProvider>
     <NuxtLoadingIndicator />
     <NuxtLayout>
       <NuxtPage />

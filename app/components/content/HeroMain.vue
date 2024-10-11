@@ -11,13 +11,13 @@
  * @todo [✔] Update the typescript.
  */
 interface Props {
-  title: string;
-  subTitle: string;
+  title: string
+  subTitle: string
 
-  CTATitle: string;
-  CTAUrl: string;
-  CTALabel: string;
-  CTAHelper: string;
+  CTATitle: string
+  CTAUrl: string
+  CTALabel: string
+  CTAHelper: string
 }
 
 const props = defineProps<Props>();
@@ -56,5 +56,5 @@ const { CTAHelper, CTALabel, CTATitle, CTAUrl, subTitle, title } = toRefs(props)
     </div>
   </div>
 </template>
+
 <style scoped></style>
-~/components/content/Heromain

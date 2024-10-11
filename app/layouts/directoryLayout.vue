@@ -40,32 +40,35 @@ export interface Filter extends NuxtLinkProps {
 }
 
 const categories = computed(() => {
-  return Object.keys(iconsMap).map(category => ({
-    key: category,
-    label: category,
-    exactQuery: true,
-    to: {
-      path: category === "All" ? "/tools" : `/tools/category/${category}`,
-      query: category === "All" ? { category } : { },
-    },
-    icon: iconsMap[category as keyof typeof iconsMap],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    click: (e: any) => {
-      if (route.query.category !== category) {
-        return;
-      }
+  return Object.keys(iconsMap)
+    .map(category => ({
+      key: category,
+      label: category,
+      exactQuery: true,
+      to: {
+        path: category === "All" ? "/tools" : `/tools/category/${category}`,
+        query: category === "All" ? { category } : undefined,
+      },
+      icon: iconsMap[category as keyof typeof iconsMap],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      click: (e: any) => {
+        if (route.query.category !== category) {
+          return;
+        }
 
-      e.preventDefault();
+        e.preventDefault();
 
-      router.replace({ query: { ...route.query, category: undefined } });
-    },
-  })).sort((a, b) => {
-    return a.label.localeCompare(b.label);
-  });
+        router.replace({ query: { ...route.query, category: undefined } });
+      },
+    }))
+    .sort((a, b) => {
+      return a.label.localeCompare(b.label);
+    });
 });
 
 const title = "Best youtube tools | Tools | NameNest";
-const description = "Explore our curated collection of tools for creators, from video editing and analytics to AI tools, designed to enhance your channel and streamline your workflow.";
+const description
+  = "Explore our curated collection of tools for creators, from video editing and analytics to AI tools, designed to enhance your channel and streamline your workflow.";
 useSeoMeta({
   titleTemplate: "%s",
   title,
@@ -75,7 +78,9 @@ useSeoMeta({
 });
 defineOgImageComponent("PageOg");
 
-const { data } = await useAsyncData("Navigation", () => queryContent("/").where({ _partial: true, title: "Navigation" }).findOne());
+const { data } = await useAsyncData("Navigation", () =>
+  queryContent("/").where({ _partial: true, title: "Navigation" }).findOne(),
+);
 </script>
 
 <template>
@@ -95,7 +100,9 @@ const { data } = await useAsyncData("Navigation", () => queryContent("/").where(
     <main class="mx-auto px-4 sm:px-6 lg:px-8 max-w-screen-2xl w-full py-10">
       <div class="flex flex-col lg:grid lg:grid-cols-10 lg:gap-8 pt-20 -mt-20">
         <section class="lg:col-span-2">
-          <UiList class="max-w-[250px] rounded-lg border dark:border-l-0 dark:border-t-0 dark:border-b-0 dark:border-r-slate-50 bg-background">
+          <UiList
+            class="max-w-[250px] rounded-lg border dark:border-l-0 dark:border-t-0 dark:border-b-0 dark:border-r-slate-50 bg-background"
+          >
             <template
               v-for="n in categories"
               :key="n.key"
@@ -129,13 +136,22 @@ const { data } = await useAsyncData("Navigation", () => queryContent("/").where(
   text-decoration: none;
   display: inline-block;
   position: relative;
-  mask-image: linear-gradient(-75deg, rgba(255,255,255,.8) 30%, #fff 50%, rgba(255,255,255,.8) 70%);
+  mask-image: linear-gradient(
+    -75deg,
+    rgba(255, 255, 255, 0.8) 30%,
+    #fff 50%,
+    rgba(255, 255, 255, 0.8) 70%
+  );
   mask-size: 200%;
   animation: shine 2s linear infinite;
 }
 
 @keyframes shine {
-  from { -webkit-mask-position: 150%; }
-  to { -webkit-mask-position: -50%; }
+  from {
+    -webkit-mask-position: 150%;
+  }
+  to {
+    -webkit-mask-position: -50%;
+  }
 }
 </style>

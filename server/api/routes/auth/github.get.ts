@@ -7,7 +7,7 @@ import {
   updateUser,
 } from "~~/server/utils/user";
 
-export default oauthGitHubEventHandler({
+export default defineOAuthGitHubEventHandler({
   config: {
     emailRequired: true,
   },
@@ -57,7 +57,7 @@ export default oauthGitHubEventHandler({
     // If the user is not signed in, search for an existing user with that email address without a GitHub ID
     // If it exists, tells the user to sign in with that account and link the GitHub account
     user = await findUserBy(
-      and(eq(tables.users.email, oauthUser.email), isNull(tables.users.githubId))
+      and(eq(tables.users.email, oauthUser.email), isNull(tables.users.githubId)),
     );
 
     if (user) {
@@ -69,7 +69,7 @@ export default oauthGitHubEventHandler({
         {
           message:
             "An existing account for this email already exists. Please login and visit your profile settings to add support for GitHub authentication.",
-        }
+        },
       );
       return sendRedirect(event, "/login");
     }
@@ -82,6 +82,7 @@ export default oauthGitHubEventHandler({
       githubId: oauthUser.id as number,
       githubToken: tokens.access_token as string,
       verifiedAt: new Date().toUTCString(),
+      roles: [0],
     });
 
     await updateUserSession(event, {
