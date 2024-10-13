@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /**
  *
- * Component Description:Desc
+ * Tools Overview
  *
  * @author Reflect-Media <reflect.media GmbH>
  * @version 0.0.1
@@ -13,7 +13,9 @@
 </script>
 
 <template>
-  <main class="flex">
-    <h2>Dashboard</h2>
-  </main>
+  <div class="grid place-content-center">
+    <CreateNewTool />
+  </div>
 </template>
+
+<style scoped></style>

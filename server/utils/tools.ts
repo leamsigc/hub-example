@@ -37,7 +37,7 @@ export async function createTool(tool: ToolInsert, categories: string[]) {
       }).returning({ id: tables.tags.id, name: tables.tags.name, label: tables.tags.label }).get();
     }
 
-    await useDrizzle().insert(tables.toolsTags).values({
+    await useDrizzle().insert(tables.toolTags).values({
       toolId: createdTool.id,
       tagId: tagExists.id,
     });
@@ -46,21 +46,19 @@ export async function createTool(tool: ToolInsert, categories: string[]) {
   // create categories for tool if they don't exist
   categories.forEach(async (category) => {
     // check if category exists
-    let categoryExists = await useDrizzle().select().from(tables.categories).where(eq(tables.categories.name, category.toUpperCase())).get();
+    const categoryExists = await useDrizzle().select().from(tables.categories).where(eq(tables.categories.name, category.toUpperCase())).get();
+
     if (categoryExists) {
       return;
     }
     else {
-      categoryExists = await useDrizzle().insert(tables.categories).values({
-        name: category.toUpperCase(),
-        label: category,
-      }).returning({ id: tables.categories.id, name: tables.categories.name, label: tables.categories.label }).get();
+      await useDrizzle().insert(tables.categories)
+        .values({
+          name: category.toUpperCase(),
+          description: category.toUpperCase() || "No description provided",
+        })
+        .returning({ id: tables.categories.id, name: tables.categories.name, label: tables.categories.description }).get();
     }
-
-    await useDrizzle().insert(tables.toolsCategories).values({
-      toolId: createdTool.id,
-      categoryId: categoryExists.id,
-    });
   });
 
   return { ...createdTool, categories: categories };

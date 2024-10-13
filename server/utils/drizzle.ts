@@ -20,6 +20,9 @@ export type User = typeof schema.users.$inferSelect;
 export type UserInsert = typeof schema.users.$inferInsert;
 export type RoleInsert = typeof schema.roles.$inferInsert;
 
+export type Category = typeof schema.categories.$inferSelect;
+export type CategoryInsert = typeof schema.categories.$inferInsert;
+
 type RoleId = number;
 export type UserInsertWithRole = UserInsert & { roles: RoleId[] };
 

@@ -69,10 +69,6 @@ export default defineOAuthGitHubEventHandler({
       return sendRedirect(event, "/login");
     }
 
-    console.log("======================");
-    console.log("Create user:");
-    console.log("oauthUser", oauthUser);
-
     // If the user is not signed in and no user exists with that GitHub ID or email address, create a new user
     const createdUser = await createUser({
       name: oauthUser.name as string,
@@ -96,6 +92,6 @@ export default defineOAuthGitHubEventHandler({
     console.log("Created user");
     console.log(createdUser);
 
-    return sendRedirect(event, "/profile");
+    return sendRedirect(event, "/app");
   },
 });

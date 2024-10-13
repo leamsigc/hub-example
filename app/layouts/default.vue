@@ -26,21 +26,28 @@ const { data } = await useAsyncData("Navigation", () => queryContent("/").where(
 </script>
 
 <template>
-  <div
-    class=" flex flex-col dark:bg-neutral-950 dark:text-slate-400 min-h-svh"
-  >
-    <UiToastToaster />
-    <NavigationHeaderSecondary
-      v-if="data"
-      :call-to-action="callToActions"
-      :menu="data.MenuLinks"
-      :short-links="data.ShortLinks"
-      :logo-link="{ title: 'Best youtube tools', href: '/', src: '' }"
+  <main>
+    <div
+      class=" flex flex-col dark:bg-neutral-950 dark:text-slate-400 min-h-svh"
     >
-      <ThemeSwitcher />
-    </NavigationHeaderSecondary>
-    <slot />
-  </div>
+      <UiToastToaster />
+      <NavigationHeaderSecondary
+        v-if="data"
+        :call-to-action="callToActions"
+        :menu="data.MenuLinks"
+        :short-links="data.ShortLinks"
+        :logo-link="{ title: 'Best youtube tools', href: '/', src: '' }"
+      >
+        <ThemeSwitcher />
+      </NavigationHeaderSecondary>
+      <slot />
+    </div>
+    <FooterBase
+      v-if="data"
+      :footer-links="data.footerLinks"
+      :social-medias="data.socialMedias"
+    />
+  </main>
 </template>
 
 <style scoped></style>

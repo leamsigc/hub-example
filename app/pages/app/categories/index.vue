@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 /**
  *
- * Component Description:Desc
+ * Categories Overview
  *
  * @author Reflect-Media <reflect.media GmbH>
  * @version 0.0.1
@@ -13,7 +13,10 @@
 </script>
 
 <template>
-  <main class="flex">
-    <h2>Dashboard</h2>
-  </main>
+  <div class="grid gap-10">
+    <CategoryCreateNew />
+    <CategoryTable />
+  </div>
 </template>
+
+<style scoped></style>

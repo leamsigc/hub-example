@@ -128,6 +128,11 @@ const { data } = await useAsyncData("Navigation", () =>
         <slot />
       </div>
     </main>
+    <FooterBase
+      v-if="data"
+      :footer-links="data.footerLinks"
+      :social-medias="data.socialMedias"
+    />
   </section>
 </template>
 

@@ -43,4 +43,38 @@ ShortLinks:
     href: "#"
   - name: "Cookie settings"
     href: "#"
+
+socialMedias:
+    - name: facebook
+      url: https://www.facebook.com/leamsigc
+      icon: 'facebook'
+    - name: twitter
+      url: https://twitter.com/leamsigc
+      icon: 'twitter'
+    - name: instagram
+      url: https://www.instagram.com/leamsigc
+      icon: 'instagram'
+footerLinks:
+    - title: About Us
+      links:
+        - name: About Us
+          url: /about
+        - name: Careers
+          url: /careers
+        - name: Blog
+          url: /blog
+        - name: Videos
+          url: /videos
+    - title: Legal
+      links:
+        - name: Terms
+          url: /terms
+        - name: Privacy
+          url: /privacy
+    - title: Contact
+      links:
+        - name: Contact
+          url: /contact
+        - name: Support
+          url: /support
 ---

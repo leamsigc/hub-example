@@ -65,6 +65,10 @@ Here you can find the best tools to get started with Youtube. From video ideas t
 
 <div class='my-20'></div>
 
+::News-letter-base
+::
+<div class='my-20'></div>
+
 ::The-Contact
 ---
 title:  "Have a question?"

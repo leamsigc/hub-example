@@ -1,7 +1,9 @@
 CREATE TABLE `categories` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text,
-	`description` text
+	`description` text DEFAULT 'No description' NOT NULL,
+	`status` text DEFAULT 'active' NOT NULL,
+	`icon` text DEFAULT 'i-ph-database-duotone' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `images` (
@@ -52,6 +54,7 @@ CREATE TABLE `tool_tags` (
 --> statement-breakpoint
 CREATE TABLE `tools` (
 	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
+	`name` text NOT NULL,
 	`url` text,
 	`description` text,
 	`likes` integer,

@@ -3,7 +3,26 @@ const isProd = process.env.NODE_ENV === "production";
 export default defineNuxtConfig({
   compatibilityDate: "2024-07-30",
   future: { compatibilityVersion: 4 },
-  modules: ["@nuxtjs/tailwindcss", "@nuxt/content", "@nuxthub/core", "@nuxt/eslint", "@nuxtjs/color-mode", "@vueuse/nuxt", "@nuxt/icon", "@samk-dev/nuxt-vcalendar", "@vee-validate/nuxt", "@nuxtjs/seo", "nuxt-swiper", "@unlighthouse/nuxt", "@formkit/nuxt", "@nuxt/image", "nuxt-auth-utils", "nuxt-security", "@formkit/auto-animate"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "@nuxt/content",
+    "@nuxthub/core",
+    "@nuxt/eslint",
+    "@nuxtjs/color-mode",
+    "@vueuse/nuxt",
+    "@nuxt/icon",
+    "@samk-dev/nuxt-vcalendar",
+    "@vee-validate/nuxt",
+    "@nuxtjs/seo",
+    "nuxt-swiper",
+    "@unlighthouse/nuxt",
+    "@formkit/nuxt",
+    "@nuxt/image",
+    "nuxt-auth-utils",
+    "nuxt-security",
+    "@formkit/auto-animate",
+    "@morev/vue-transitions/nuxt",
+  ],
   routeRules: {
     "/api/me": {
       security: {
@@ -102,7 +121,7 @@ export default defineNuxtConfig({
 
   content: {
     // ... options
-    documentDriven: true,
+    documentDriven: false,
   },
   ogImage: {
     componentOptions: {
