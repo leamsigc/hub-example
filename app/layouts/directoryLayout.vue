@@ -47,11 +47,11 @@ const categories = computed(() => {
   return baseCategories.value
     .map(category => ({
       key: category.id,
-      label: category.name as string || `${category.id}`,
+      label: `${category.name?.charAt(0).toUpperCase()}${category.name?.slice(1).toLowerCase()}` || `${category.id}`,
       exactQuery: true,
       to: {
-        path: category.name === "All" ? "/tools" : `/tools/category/${category.name}`,
-        query: category.name === "All" ? { category: category.name } : undefined,
+        path: category.name === "ALL" ? "/tools" : `/tools/category/${category.name}`,
+        query: category.name === "ALL" ? { category: category.name } : undefined,
       },
       icon: category.icon,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

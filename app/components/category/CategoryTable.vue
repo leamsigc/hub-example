@@ -139,6 +139,7 @@ const onSubmit = handleSubmit(async (values) => {
             </UiTableHead>
             <UiTableHead>Icon</UiTableHead>
             <UiTableHead>Status</UiTableHead>
+            <UiTableHead>Description</UiTableHead>
             <UiTableHead class="text-right">
               Actions
             </UiTableHead>
@@ -157,10 +158,11 @@ const onSubmit = handleSubmit(async (values) => {
                 <Icon :name="category.icon" />
               </UiTableCell>
               <UiTableCell>{{ category.status }}</UiTableCell>
+              <UiTableCell>{{ category.description }}</UiTableCell>
               <UiTableCell class="text-right">
                 <UiDialogTrigger>
                   <UiButton
-                    class="mr-2 text-sm p-0 rounded-full w-10 h-10"
+                    class="mr-2 text-sm p-0 rounded w-6 h-6"
                     variant="outline"
                     @click="OpenEditCategory(category)"
                   >
@@ -169,7 +171,7 @@ const onSubmit = handleSubmit(async (values) => {
                 </UiDialogTrigger>
                 <UiButton
                   variant="default"
-                  class="mr-2 text-sm p-0 rounded-full w-10 h-10 bg-red-500"
+                  class="mr-2 text-sm p-0 rounded w-6 h-6 bg-red-500"
                   @click="HandleDeleteCategory(category.id)"
                 >
                   <Icon name="lucide:trash" />
