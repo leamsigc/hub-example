@@ -271,6 +271,13 @@ const logout = async () => {
         <UiButton
           v-if="user && session.user"
           variant="ghost"
+          to="/app"
+        >
+          App
+        </UiButton>
+        <UiButton
+          v-if="user && session.user"
+          variant="ghost"
           @click="logout"
         >
           Logout

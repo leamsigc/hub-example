@@ -11,15 +11,20 @@
  * @todo [✔] Update the typescript.
  */
 import { z } from "zod";
+import { Field } from "vee-validate";
+
+const { createCategory } = useCategory();
 
 const dialog = ref(false);
 const cardIsPending = ref(false);
 
 const schema = z.object({
   name: z.string({ required_error: "Required" }).min(3, { message: "Min 3 characters" }),
-  description: z.string({ required_error: "Required" }).min(3, { message: "Min 3 characters" }),
+  description: z
+    .string({ required_error: "Required" })
+    .min(3, { message: "Min 3 characters" }),
   icon: z.string({ required_error: "Required" }).min(3, { message: "Min 3 characters" }),
-  status: z.boolean({ required_error: "Required" }).default(false),
+  status: z.boolean({ required_error: "Required" }).default(true),
 });
 
 const { handleSubmit, isSubmitting } = useForm({
@@ -27,7 +32,24 @@ const { handleSubmit, isSubmitting } = useForm({
 });
 
 const onSubmit = handleSubmit(async (values) => {
-  console.log(values);
+  const formattedNewCategory = {
+    name: values.name,
+    description: values.description,
+    icon: values.icon,
+    status: values.status ? "ACTIVE" : "INACTIVE",
+  };
+  const { status, error } = await createCategory(formattedNewCategory);
+  if (status.value === "success") {
+    dialog.value = false;
+  }
+  else {
+    useToast().toast({
+      title: "Can't create category",
+      description: error.value.data.message,
+      variant: "destructive",
+      icon: "lucide:badge-x",
+    });
+  }
 });
 </script>
 
@@ -51,9 +73,7 @@ const onSubmit = handleSubmit(async (values) => {
               v-if="cardIsPending"
               class="grid gap-4 py-4"
             >
-              <div
-                class="grid grid-cols-4 items-center gap-4"
-              >
+              <div class="grid grid-cols-4 items-center gap-4">
                 <div class="flex items-center space-x-4">
                   <UiSkeleton class="h-12 w-12 rounded-full" />
                   <div class="space-y-2">
@@ -93,12 +113,20 @@ const onSubmit = handleSubmit(async (values) => {
                     label="Icon"
                     name="icon"
                   />
-                  <div class="flex items-center space-x-2">
-                    <UiSwitch id="status" />
-                    <UiLabel for="status">
-                      Status
-                    </UiLabel>
-                  </div>
+                  <Field
+                    v-slot="{ handleChange, value }"
+                    name="status"
+                  >
+                    <div class="flex items-center gap-3">
+                      <UiSwitch
+                        :checked="value"
+                        @update:checked="handleChange"
+                      />
+                      <UiLabel class="w-auto">
+                        Status
+                      </UiLabel>
+                    </div>
+                  </Field>
 
                   <UiButton type="submit">
                     Submit
@@ -114,6 +142,4 @@ const onSubmit = handleSubmit(async (values) => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

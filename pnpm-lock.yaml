@@ -79,6 +79,9 @@ devDependencies:
   '@iconify-json/lucide':
     specifier: ^1.2.8
     version: 1.2.8
+  '@iconify-json/ph':
+    specifier: ^1.2.1
+    version: 1.2.1
   '@nuxt/content':
     specifier: ^2.13.2
     version: 2.13.2(nuxt@3.13.2)(vue@3.5.6)
@@ -2136,6 +2139,12 @@ packages:
 
   /@iconify-json/lucide@1.2.8:
     resolution: {integrity: sha512-knmDUXky8AAQ0rnGdnBjS1mBr6c0tT7aVbBd7AJcDTcJYvx9XEeyHlabFKG03DaLbOkCy0QHwCYoeZHRDEzOFA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/ph@1.2.1:
+    resolution: {integrity: sha512-x0DNfwWrS18dbsBYOq3XGiZnGz4CgRyC+YSl/TZvMQiKhIUl1woWqUbMYqqfMNUBzjyk7ulvaRovpRsIlqIf8g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

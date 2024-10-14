@@ -44,7 +44,11 @@ const bottomNav = [
   },
 ];
 
-const { data } = await useAsyncData("Navigation", () => queryContent("/").where({ _partial: true, title: "Navigation" }).findOne());
+// const { data } = await useAsyncData("Navigation", () => queryContent("/").where({ _partial: true, title: "Navigation" }).findOne());
+const { data } = await useAsyncData(
+  "Navigation",
+  () => queryContent("/").where({ _partial: true, title: "Navigation" }).findOne(),
+);
 </script>
 
 <template>

@@ -14,45 +14,49 @@ import type { NuxtLinkProps } from "#app";
  */
 const route = useRoute();
 const router = useRouter();
-const iconsMap = {
-  All: "i-ph-list-duotone",
-  Analytics: "i-ph-chart-bar-duotone",
-  CMS: "i-ph-pencil-duotone",
-  CSS: "i-ph-paint-brush-broad-duotone",
-  Database: "i-ph-database-duotone",
-  Devtools: "i-ph-wrench-duotone",
-  Ecommerce: "i-ph-shopping-cart-duotone",
-  Extensions: "i-ph-puzzle-piece-duotone",
-  Fonts: "i-ph-text-aa-duotone",
-  Images: "i-ph-image-duotone",
-  Libraries: "i-ph-books-duotone",
-  Monitoring: "i-ph-timer-duotone",
-  Payment: "i-ph-credit-card-duotone",
-  Performance: "i-ph-gauge-duotone",
-  Request: "i-ph-plugs-connected-duotone",
-  Security: "i-ph-shield-duotone",
-  SEO: "i-ph-file-search-duotone",
-  UI: "i-ph-layout-duotone",
-};
+// const iconsMap = {
+//   All: "i-ph-list-duotone",
+//   Analytics: "i-ph-chart-bar-duotone",
+//   CMS: "i-ph-pencil-duotone",
+//   CSS: "i-ph-paint-brush-broad-duotone",
+//   Database: "i-ph-database-duotone",
+//   Devtools: "i-ph-wrench-duotone",
+//   Ecommerce: "i-ph-shopping-cart-duotone",
+//   Extensions: "i-ph-puzzle-piece-duotone",
+//   Fonts: "i-ph-text-aa-duotone",
+//   Images: "i-ph-image-duotone",
+//   Libraries: "i-ph-books-duotone",
+//   Monitoring: "i-ph-timer-duotone",
+//   Payment: "i-ph-credit-card-duotone",
+//   Performance: "i-ph-gauge-duotone",
+//   Request: "i-ph-plugs-connected-duotone",
+//   Security: "i-ph-shield-duotone",
+//   SEO: "i-ph-file-search-duotone",
+//   UI: "i-ph-layout-duotone",
+// };
 export interface Filter extends NuxtLinkProps {
   key: string | number
   icon?: string
 }
 
+const { categories: baseCategories, getCategories } = useCategory();
+
+await getCategories();
+
 const categories = computed(() => {
-  return Object.keys(iconsMap)
+  return baseCategories.value
     .map(category => ({
-      key: category,
-      label: category,
+      key: category.id,
+      label: category.name as string || `${category.id}`,
       exactQuery: true,
       to: {
-        path: category === "All" ? "/tools" : `/tools/category/${category}`,
-        query: category === "All" ? { category } : undefined,
+        path: category.name === "All" ? "/tools" : `/tools/category/${category.name}`,
+        query: category.name === "All" ? { category: category.name } : undefined,
       },
-      icon: iconsMap[category as keyof typeof iconsMap],
+      icon: category.icon,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       click: (e: any) => {
-        if (route.query.category !== category) {
+        if (route.query.category !== category.name) {
           return;
         }
 

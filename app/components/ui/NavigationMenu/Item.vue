@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { NavigationMenuItem } from "radix-vue";
-  import type { NavigationMenuItemProps } from "radix-vue";
+import { NavigationMenuItem } from "radix-vue";
+import type { NavigationMenuItemProps } from "radix-vue";
 
-  const props = defineProps<NavigationMenuItemProps>();
+const props = defineProps<NavigationMenuItemProps>();
 </script>
