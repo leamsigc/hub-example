@@ -17,7 +17,7 @@
     <div class="flex h-full items-center justify-center lg:w-2/3 xl:w-1/2">
       <div>
         <h1 class="mb-4 mt-7 text-4xl font-semibold lg:mb-6 lg:mt-5 lg:text-5xl xl:text-6xl">
-          Be the first to know when we launch
+          Be the first to know when we launch a new tool
         </h1>
         <p class="text-lg text-muted-foreground lg:text-xl">
           We're still building. Subscribe for updates and 20% off when we launch. No spam, we

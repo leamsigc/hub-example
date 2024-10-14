@@ -48,10 +48,28 @@ ogImage:
 ---
 
 
+::Schema-wrapper
+---
+webSite:
+  title: "About Us | Rosa Mexicana Cocina"
+  description: "Located in the heart of Huntsville, Alabama, Rosa Mexicana Cocina proudly brings the vibrant flavors and cultural heritage of Oaxaca, Mexico, to your table."
+  url: "https://rosamexicanrestauranthuntsville.com/about"
+  image: /base/logo.png
+  type: "website"
+  locale: "en"
+  site_name: "About Us | Rosa Mexicana Cocina"
+  publisher: "Rosa Mexicana Cocina"
+  keywords: "Seattle, expert carpentry, vibrant painting, home enhancement, residential services, Jahaziel's Carpentry & Painting"
+  author: "Rosa Mexicana Cocina"
+  publisher_id: "https://www.facebook.com/RosaMexicanaCocina"
+  publisher_url: "https://www.facebook.com/RosaMexicanaCocina"
+---
+:::
+
 ::Hero-component
 ---
 alt: "About Us | Rosa Mexicana Cocina"
-heroImageUrl: /oaxacan-mole.png
+heroImageUrl: base/logo.png
 title: "About Us | Rosa Mexicana Cocina."
 href: "tel:+1-256-559-5900"
 subTitle: " Let's Celebrate With Us. Located in the heart of Huntsville, Alabama, Rosa Mexicana Cocina proudly brings the vibrant flavors and cultural heritage of Oaxaca, Mexico, to your table, serving you with the best Mexican food across Huntsville alabama."
