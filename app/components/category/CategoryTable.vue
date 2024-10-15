@@ -66,6 +66,34 @@ const onSubmit = handleSubmit(async (values) => {
     });
   }
 });
+
+const tableHeader = [
+  {
+    label: "Name",
+    key: "name",
+    class: "w-[300px]",
+  },
+  {
+    label: "Icon",
+    key: "icon",
+    class: "",
+  },
+  {
+    label: "Status",
+    key: "status",
+    class: "",
+  },
+  {
+    label: "Description",
+    key: "description",
+    class: "",
+  },
+  {
+    label: "Action",
+    key: "action",
+    class: "text-right",
+  },
+];
 </script>
 
 <template>
@@ -134,14 +162,12 @@ const onSubmit = handleSubmit(async (values) => {
         <UiTableCaption>A list of all available Categories</UiTableCaption>
         <UiTableHeader>
           <UiTableRow>
-            <UiTableHead class="w-[300px]">
-              Name
-            </UiTableHead>
-            <UiTableHead>Icon</UiTableHead>
-            <UiTableHead>Status</UiTableHead>
-            <UiTableHead>Description</UiTableHead>
-            <UiTableHead class="text-right">
-              Actions
+            <UiTableHead
+              v-for="item in tableHeader"
+              :key="item.key"
+              :class="item.class"
+            >
+              {{ item.label }}
             </UiTableHead>
           </UiTableRow>
         </UiTableHeader>

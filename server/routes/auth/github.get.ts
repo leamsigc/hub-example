@@ -5,8 +5,6 @@ export default defineOAuthGitHubEventHandler({
   async onSuccess(event, { user: oauthUser, tokens }) {
     const { user: userSession } = await getUserSession(event);
 
-    console.log("User session", userSession);
-
     // If the user is already signed in, link the account
     if (userSession?.id) {
       const user = await findUserById(userSession.id);
@@ -28,9 +26,6 @@ export default defineOAuthGitHubEventHandler({
     // If the user is not signed in, search for an existing user with that GitHub ID
     // If it exists, sign in as that user and refresh the token
     let user = await findUserByGitHubId(oauthUser.id);
-    console.log("User from the db");
-    console.log(user);
-
     if (user) {
       await updateUser(user.id, {
         githubId: oauthUser.id,

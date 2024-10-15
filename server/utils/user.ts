@@ -18,6 +18,19 @@ export async function findUserBy(query: SQL | undefined) {
 }
 
 export async function createUser(user: UserInsertWithRole) {
+  // Check that the role exists
+  const roleExists = await useDrizzle().select().from(tables.roles).where(eq(tables.roles.id, user.roles[0])).get();
+
+  if (!roleExists) {
+    // Create role
+    const createdRole = await useDrizzle()
+      .insert(tables.roles)
+      .values({ id: user.roles[0], name: "USER", label: "USER" })
+      .returning({ id: tables.roles.id, name: tables.roles.name })
+      .get();
+    user.roles[0] = createdRole.id;
+  }
+
   const createdUser = await useDrizzle()
     .insert(tables.users)
     .values(user)
