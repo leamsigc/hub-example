@@ -1,0 +1,14 @@
+import { create{{crudNamePascal}} } from "./db";
+import { insert{{crudNamePascal}}Schema } from "~~/server/utils/drizzle";
+import { checkIf{{crudNamePascal}}Exists } from "~~/server/utils/{{crudNameKebab}}";
+
+export default eventHandler(async (event) => {
+  const body = await readValidatedBody(event, insert{{crudNamePascal}}Schema.parse);
+  const existing{{crudNamePascal}} = await checkIf{{crudNamePascal}}Exists(body.name as string);
+  if (existing{{crudNamePascal}}) {
+    return createError({ statusCode: 409, message: "{{crudNamePascal}} already exists" });
+  } else {
+    const created{{crudNamePascal}} = await create{{crudNamePascal}}(body);
+    return created{{crudNamePascal}};
+  }
+});

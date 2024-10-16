@@ -1,0 +1,57 @@
+// db.ts.template
+
+import type { SQL } from "drizzle-orm";
+import type { {{crudNamePascal}}Insert, {{crudNamePascal}}Entity } from "~~/server/utils/drizzle";
+
+export async function find{{crudNamePascal}}ById(id: number) {
+  try {
+    return await useDrizzle().select().from(tables.{{crudNameKebab}}).where(eq(tables.{{crudNameKebab}}.id, id)).get();
+  } catch (error) {
+    console.error(`Error finding {{crudNamePascal}} by ID:`, error);
+    throw error;
+  }
+}
+
+export async function find{{crudNamePascal}}By(query: SQL | undefined) {
+  try {
+    return await useDrizzle().select().from(tables.{{crudNameKebab}}).where(query).get();
+  } catch (error) {
+    console.error(`Error finding {{crudNamePascal}} by query:`, error);
+    throw error;
+  }
+}
+
+export async function create{{crudNamePascal}}({{crudNameCamel}}: {{crudNamePascal}}Insert) {
+  try {
+    const created{{crudNamePascal}} = await useDrizzle()
+    .insert(tables.{{crudNameKebab}})
+    .values({{crudNameCamel}})
+    .returning({
+        id: tables.{{crudNameKebab}}.id,
+        // Add other returning fields as needed
+      })
+    .get();
+    return created{{crudNamePascal}};
+  } catch (error) {
+    console.error(`Error creating {{crudNamePascal}}:`, error);
+    throw error;
+  }
+}
+
+export async function update{{crudNamePascal}}(id: number, {{crudNameCamel}}: Partial<{{crudNamePascal}}Insert>) {
+  try {
+    return await useDrizzle().update(tables.{{crudNameKebab}}).set({{crudNameCamel}}).where(eq(tables.{{crudNameKebab}}.id, id)).run();
+  } catch (error) {
+    console.error(`Error updating {{crudNamePascal}}:`, error);
+    throw error;
+  }
+}
+
+export async function delete{{crudNamePascal}}(id: number) {
+  try {
+    return await useDrizzle().delete(tables.{{crudNameKebab}}).where(eq(tables.{{crudNameKebab}}.id, id)).run();
+  } catch (error) {
+    console.error(`Error deleting {{crudNamePascal}}:`, error);
+    throw error;
+  }
+}

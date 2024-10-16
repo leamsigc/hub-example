@@ -1,0 +1,10 @@
+import { delete{{crudNamePascal}} } from "./db";
+
+export default defineEventHandler(async (event) => {
+  const id = getRouterParam(event, "id");
+  console.log(`Deleting {{crudNamePascal}} with id: ${id}`);
+  if (!id) {
+    return sendNoContent(event, 400);
+  }
+  return await delete{{crudNamePascal}}(Number(id));
+});

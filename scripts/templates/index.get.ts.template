@@ -1,0 +1,19 @@
+// index.get.ts.template
+
+import { getAll{{crudNamePascal}} } from "~~/server/utils/{{crudNameKebab}}";
+
+export default eventHandler(async (event) => {
+  try {
+    const {{crudNameKebab}}List = await getAll{{crudNamePascal}}();
+    return {
+      body: {{crudNameKebab}}List,
+      status: 200,
+    };
+  } catch (error) {
+    console.error(`Error fetching {{crudNamePascal}}:`, error);
+    return {
+      body: { error: `Failed to fetch {{crudNamePascal}}` },
+      status: 500,
+    };
+  }
+});

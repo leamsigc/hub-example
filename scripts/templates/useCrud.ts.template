@@ -1,0 +1,74 @@
+// useCrud.ts.template
+
+import type { {{crudNamePascal}} } from "~~/server/utils/drizzle";
+
+const {{crudNameKebab}}List = ref<{{crudNamePascal}}[]>([]);
+
+export function use{{crudNamePascal}}Crud() {
+  const get{{crudNamePascal}}List = async () => {
+    const { data } = await useFetch<{{crudNamePascal}}[]>(`/api/v1/{{crudNameKebab}}`);
+    {{crudNameKebab}}List.value = data.value as unknown as {{crudNamePascal}}[];
+  };
+
+  const create{{crudNamePascal}} = async ({{crudNameCamel}}: Omit<{{crudNamePascal}}, "id">) => {
+    const { status, error } = await useCsrfFetch(`/api/v1/{{crudNameKebab}}`, {
+      method: "POST",
+      body: {{crudNameCamel}},
+    });
+
+    if (status.value === "success") {
+      get{{crudNamePascal}}List();
+      return { status, error };
+    } else {
+      return { status, error };
+    }
+  };
+
+  const HandleEdit{{crudNamePascal}} = async ({{crudNameCamel}}: {{crudNamePascal}}) => {
+    const { status, error } = await useCsrfFetch(`/api/v1/{{crudNameKebab}}/${{{crudNameCamel}}.id}`, {
+      method: "PUT",
+      body: {{crudNameCamel}},
+    });
+
+    if (status.value === "success") {
+      get{{crudNamePascal}}List();
+      return { status, error };
+    } else {
+      return { status, error };
+    }
+  };
+
+  const HandleDelete{{crudNamePascal}} = async (id: number) => {
+    const { status, error } = await useCsrfFetch(`/api/v1/{{crudNameKebab}}/${id}`, {
+      method: "DELETE",
+    });
+
+    if (status.value === "success") {
+      get{{crudNamePascal}}List();
+      useToast().toast({
+        title: "{{crudNamePascal}} deleted",
+        description: "{{crudNamePascal}} deleted successfully",
+        variant: "success",
+        icon: "lucide:check",
+      });
+
+      return { status, error };
+    } else {
+      useToast().toast({
+        title: "Can't delete {{crudNamePascal}}",
+        description: error.value.data.message,
+        variant: "destructive",
+        icon: "lucide:badge-x",
+      });
+      return { status, error };
+    }
+  };
+
+  return {
+    {{crudNameKebab}}List,
+    get{{crudNamePascal}}List,
+    create{{crudNamePascal}},
+    HandleEdit{{crudNamePascal}},
+    HandleDelete{{crudNamePascal}},
+  };
+}

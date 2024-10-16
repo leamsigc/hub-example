@@ -1,0 +1,10 @@
+import { update{{crudNamePascal}} } from "./db";
+import { insert{{crudNamePascal}}Schema } from "~~/server/utils/drizzle";
+
+export default defineEventHandler(async (event) => {
+  const id = getRouterParam(event, "id");
+  console.log(`Updating {{crudNamePascal}} with id: ${id}`);
+  const body = await readValidatedBody(event, insert{{crudNamePascal}}Schema.parse);
+  const updated{{crudNamePascal}} = await update{{crudNamePascal}}(Number(id), body);
+  return updated{{crudNamePascal}};
+});
