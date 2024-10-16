@@ -1,5 +1,5 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -83,3 +83,95 @@ export const toolTags = sqliteTable("tool_tags", {
   toolId: integer("tool_id").references(() => tools.id),
   tagId: integer("tag_id").references(() => tags.id),
 });
+
+// Users Relationships
+// Users Relationships
+export const usersRelations = relations(users, ({ many }) => ({
+  tools: many(tools), // One-to-Many: Users have many Tools (via tools.userId)
+  userRoles: many(userRoles), // Many-to-Many: Users and Roles (via userRoles)
+}));
+
+// Tools Relationships
+export const toolsRelations = relations(tools, ({ one, many }) => ({
+  user: one(users, {
+    fields: [tools.userId],
+    references: [users.id],
+  }),
+  category: one(categories, {
+    fields: [tools.categoryId],
+    references: [categories.id],
+  }),
+  promotion: one(promotions, {
+    fields: [tools.id],
+    references: [promotions.toolId],
+  }),
+  toolTags: many(toolTags),
+  stats: one(stats, {
+    fields: [tools.id],
+    references: [stats.toolId],
+  }),
+  images: many(images),
+}));
+
+// UserRoles Relationships (Many-to-Many between Users and Roles)
+export const userRolesRelations = relations(userRoles, ({ one }) => ({
+  user: one(users, {
+    fields: [userRoles.userId],
+    references: [users.id],
+  }),
+  role: one(roles, {
+    fields: [userRoles.roleId],
+    references: [roles.id],
+  }),
+}));
+
+// Roles Relationships
+export const rolesRelations = relations(roles, ({ many }) => ({
+  userRoles: many(userRoles),
+}));
+
+// Categories Relationships
+export const categoriesRelations = relations(categories, ({ many }) => ({
+  tools: many(tools),
+}));
+
+// Promotions Relationships
+export const promotionsRelations = relations(promotions, ({ one }) => ({
+  tool: one(tools, {
+    fields: [promotions.toolId],
+    references: [tools.id],
+  }),
+}));
+
+// Tags Relationships
+export const tagsRelations = relations(tags, ({ many }) => ({
+  toolTags: many(toolTags),
+}));
+
+// ToolTags Relationships (Many-to-Many between Tools and Tags)
+export const toolTagsRelations = relations(toolTags, ({ one }) => ({
+  tool: one(tools, {
+    fields: [toolTags.toolId],
+    references: [tools.id],
+  }),
+  tag: one(tags, {
+    fields: [toolTags.tagId],
+    references: [tags.id],
+  }),
+}));
+
+// Stats Relationships
+export const statsRelations = relations(stats, ({ one }) => ({
+  tool: one(tools, {
+    fields: [stats.toolId],
+    references: [tools.id],
+  }),
+}));
+
+// Images Relationships
+export const imagesRelations = relations(images, ({ one }) => ({
+  tool: one(tools, {
+    fields: [images.toolId],
+    references: [tools.id],
+  }),
+}));
