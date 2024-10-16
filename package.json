@@ -13,7 +13,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:turso": "drizzle-kit push:sqlite --config=drizzle.config.ts",
-    "script:create:crud": "node scripts/create-tool.mjs"
+    "create:crud": "node scripts/create-crud.mjs"
   },
   "dependencies": {
     "@internationalized/date": "^3.5.6",
