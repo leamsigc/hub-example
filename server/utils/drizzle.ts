@@ -32,3 +32,7 @@ export type Tool = typeof schema.tools.$inferSelect;
 export type ToolInsert = typeof schema.tools.$inferInsert;
 
 export const insertToolSchema = createInsertSchema(schema.tools);
+
+export const insertTagSchema = createInsertSchema(schema.tags);
+export type TagInsert = typeof schema.tags.$inferInsert;
+export type Tag = typeof schema.tags.$inferSelect;
