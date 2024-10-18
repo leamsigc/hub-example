@@ -10,15 +10,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { TooltipRoot, useForwardPropsEmits } from "radix-vue";
-  import type { TooltipProviderProps, TooltipRootEmits, TooltipRootProps } from "radix-vue";
+import { TooltipRoot, useForwardPropsEmits } from "radix-vue";
+import type { TooltipProviderProps, TooltipRootEmits, TooltipRootProps } from "radix-vue";
 
-  defineOptions({ inheritAttrs: false });
-  const props = withDefaults(defineProps<TooltipRootProps & TooltipProviderProps>(), {
-    delayDuration: 200,
-  });
+defineOptions({ inheritAttrs: false });
+const props = withDefaults(defineProps<TooltipRootProps & TooltipProviderProps>(), {
+  delayDuration: 200,
+});
 
-  const emits = defineEmits<TooltipRootEmits>();
+const emits = defineEmits<TooltipRootEmits>();
 
-  const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits);
 </script>

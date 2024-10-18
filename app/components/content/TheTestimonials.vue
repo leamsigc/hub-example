@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  /**
+/**
    *
    * Component Description:Desc
    *
@@ -10,31 +10,35 @@
    * @todo [ ] Integration test.
    * @todo [✔] Update the typescript.
    */
-  interface Testimonials {
-    desc: string;
-    name: string;
-    imgSrc: string;
-    role: string;
-    alt: string;
-  }
-  interface Props {
-    items: Testimonials[];
-    title: string;
-    subTitle: string;
-    description: string;
-  }
-  const props = defineProps<Props>();
-  const { items, description, subTitle, title } = toRefs(props);
+interface Testimonials {
+  desc: string
+  name: string
+  imgSrc: string
+  role: string
+  alt: string
+}
+interface Props {
+  items: Testimonials[]
+  title: string
+  subTitle: string
+  description: string
+}
+const props = defineProps<Props>();
+const { items, description, subTitle, title } = toRefs(props);
 
-  const swapperAutoplay = {
-    delay: 8000,
-    disableOnInteraction: true,
-  };
+const swapperAutoplay = {
+  delay: 8000,
+  disableOnInteraction: true,
+};
 </script>
 
 <template>
   <div class="container mx-auto">
-    <TheTitle :title="title" :subTitle="subTitle" :description="description" />
+    <TheTitle
+      :title="title"
+      :sub-title="subTitle"
+      :description="description"
+    />
 
     <div>
       <Swiper
@@ -55,4 +59,5 @@
     </div>
   </div>
 </template>
+
 <style scoped></style>

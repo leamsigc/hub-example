@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { ScrollAreaCorner } from "radix-vue";
-  import type { ScrollAreaCornerProps } from "radix-vue";
+import { ScrollAreaCorner } from "radix-vue";
+import type { ScrollAreaCornerProps } from "radix-vue";
 
-  const props = defineProps<ScrollAreaCornerProps>();
+const props = defineProps<ScrollAreaCornerProps>();
 </script>

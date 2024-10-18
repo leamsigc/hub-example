@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  /**
+/**
    *
    * Component Description:Desc
    *
@@ -10,16 +10,16 @@
    * @todo [ ] Integration test.
    * @todo [✔] Update the typescript.
    */
-  interface Props {
-    targetUrl: string;
-    title: string;
-    imgSrc: string;
-    date: string;
-    alt: string;
-  }
+interface Props {
+  targetUrl: string
+  title: string
+  imgSrc: string
+  date: string
+  alt: string
+}
 
-  const props = defineProps<Props>();
-  const { targetUrl, title, imgSrc, date, alt } = toRefs(props);
+const props = defineProps<Props>();
+const { targetUrl, title, imgSrc, date, alt } = toRefs(props);
 </script>
 
 <template>
@@ -31,12 +31,15 @@
       style="visibility: visible; animation-delay: 0.1s"
     >
       <div class="mb-8 min-h-40 overflow-hidden rounded-[5px]">
-        <NuxtLink :href="targetUrl" class="block">
+        <NuxtLink
+          :href="targetUrl"
+          class="block"
+        >
           <img
             :src="imgSrc"
             :alt="alt"
             class="w-full transition group-hover:rotate-6 group-hover:scale-125"
-          />
+          >
         </NuxtLink>
       </div>
       <div>
@@ -58,4 +61,5 @@
     </div>
   </div>
 </template>
+
 <style scoped></style>

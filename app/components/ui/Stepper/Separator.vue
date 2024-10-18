@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { StepperSeparator } from "radix-vue";
-  import type { StepperSeparatorProps } from "radix-vue";
+import { StepperSeparator } from "radix-vue";
+import type { StepperSeparatorProps } from "radix-vue";
 
-  const props = defineProps<StepperSeparatorProps>();
+const props = defineProps<StepperSeparatorProps>();
 </script>

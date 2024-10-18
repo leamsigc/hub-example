@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-  const props = defineProps<{
-    class?: any;
-  }>();
+const props = defineProps<{
+  class?: any
+}>();
 
-  const styles = tv({
-    base: "whitespace-nowrap p-4 align-middle",
-  });
+const styles = tv({
+  base: "whitespace-nowrap p-4 align-middle",
+});
 </script>

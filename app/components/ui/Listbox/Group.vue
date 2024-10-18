@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { ListboxGroup, useForwardPropsEmits } from "radix-vue";
-  import type { ListboxGroupProps } from "radix-vue";
+import { ListboxGroup, useForwardPropsEmits } from "radix-vue";
+import type { ListboxGroupProps } from "radix-vue";
 
-  const props = defineProps<ListboxGroupProps>();
-  const forwarded = useForwardPropsEmits(props);
+const props = defineProps<ListboxGroupProps>();
+const forwarded = useForwardPropsEmits(props);
 </script>

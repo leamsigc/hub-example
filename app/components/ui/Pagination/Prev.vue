@@ -1,7 +1,11 @@
 <template>
   <PaginationPrev v-bind="forwarded">
     <slot>
-      <UiButton v-if="icon" variant="ghost" size="icon-sm">
+      <UiButton
+        v-if="icon"
+        variant="ghost"
+        size="icon-sm"
+      >
         <Icon :name="icon" />
       </UiButton>
     </slot>
@@ -9,15 +13,15 @@
 </template>
 
 <script lang="ts" setup>
-  import { PaginationPrev } from "radix-vue";
-  import type { PaginationPrevProps } from "radix-vue";
+import { PaginationPrev } from "radix-vue";
+import type { PaginationPrevProps } from "radix-vue";
 
-  const props = defineProps<
-    PaginationPrevProps & {
-      /** Icon to show */
-      icon?: string;
-    }
-  >();
+const props = defineProps<
+  PaginationPrevProps & {
+    /** Icon to show */
+    icon?: string
+  }
+>();
 
-  const forwarded = reactiveOmit(props, "icon");
+const forwarded = reactiveOmit(props, "icon");
 </script>

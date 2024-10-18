@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-  import { ToastProvider } from "radix-vue";
-  import type { ToastProviderProps } from "radix-vue";
+import { ToastProvider } from "radix-vue";
+import type { ToastProviderProps } from "radix-vue";
 
-  const props = withDefaults(defineProps<ToastProviderProps>(), {
-    label: "Notification",
-    swipeDirection: "right",
-  });
+const props = withDefaults(defineProps<ToastProviderProps>(), {
+  label: "Notification",
+  swipeDirection: "right",
+});
 </script>

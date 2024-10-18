@@ -1,5 +1,8 @@
 <template>
-  <DrawerDescription v-bind="props" :class="styles({ class: props.class })">
+  <DrawerDescription
+    v-bind="props"
+    :class="styles({ class: props.class })"
+  >
     <slot>
       {{ props.text }}
     </slot>
@@ -7,17 +10,17 @@
 </template>
 
 <script lang="ts" setup>
-  import { DrawerDescription } from "vaul-vue";
+import { DrawerDescription } from "vaul-vue";
 
-  interface Props
-    extends /* @vue-ignore */ Partial<Pick<InstanceType<typeof DrawerDescription>, "$props">> {
-    class?: any;
-    text?: string;
-  }
+interface Props
+  extends /* @vue-ignore */ Partial<Pick<InstanceType<typeof DrawerDescription>, "$props">> {
+  class?: any
+  text?: string
+}
 
-  const props = defineProps<Props>();
+const props = defineProps<Props>();
 
-  const styles = tv({
-    base: "text-sm text-muted-foreground",
-  });
+const styles = tv({
+  base: "text-sm text-muted-foreground",
+});
 </script>

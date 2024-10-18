@@ -1,5 +1,8 @@
 <template>
-  <SwitchRoot v-bind="forwarded" :class="styles({ class: props.class })">
+  <SwitchRoot
+    v-bind="forwarded"
+    :class="styles({ class: props.class })"
+  >
     <UiSwitchThumb>
       <slot />
     </UiSwitchThumb>
@@ -13,8 +16,8 @@ import type { SwitchRootEmits, SwitchRootProps } from "radix-vue";
 const props = withDefaults(
   defineProps<
     SwitchRootProps & {
-      class?: any;
-      id?: any;
+      class?: any
+      id?: any
     }
   >(),
   {

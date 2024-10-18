@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  /**
+/**
    *
    * Component Description:Desc
    *
@@ -10,15 +10,15 @@
    * @todo [ ] Integration test.
    * @todo [✔] Update the typescript.
    */
-  interface Props {
-    desc: string;
-    name: string;
-    imgSrc: string;
-    role: string;
-    alt: string;
-  }
-  const prop = defineProps<Props>();
-  const { desc, name, imgSrc, role, alt } = toRefs(prop);
+interface Props {
+  desc: string
+  name: string
+  imgSrc: string
+  role: string
+  alt: string
+}
+const prop = defineProps<Props>();
+const { desc, name, imgSrc, role, alt } = toRefs(prop);
 </script>
 
 <template>
@@ -35,9 +35,16 @@
       {{ desc }}
     </p>
 
-    <a href="#" class="flex items-center gap-4">
+    <a
+      href="#"
+      class="flex items-center gap-4"
+    >
       <div class="h-[50px] w-[50px] overflow-hidden rounded-full">
-        <img :src="imgSrc" :alt="alt" class="h-[50px] w-[50px] overflow-hidden rounded-full" />
+        <img
+          :src="imgSrc"
+          :alt="alt"
+          class="h-[50px] w-[50px] overflow-hidden rounded-full"
+        >
       </div>
 
       <div>
@@ -47,4 +54,5 @@
     </a>
   </div>
 </template>
+
 <style scoped></style>

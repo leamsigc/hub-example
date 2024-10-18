@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-  const props = defineProps<{
-    class?: any;
-  }>();
+const props = defineProps<{
+  class?: any
+}>();
 
-  const styles = tv({
-    base: "[&_tr]:border-b",
-  });
+const styles = tv({
+  base: "[&_tr]:border-b",
+});
 </script>

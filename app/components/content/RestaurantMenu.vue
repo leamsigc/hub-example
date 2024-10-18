@@ -12,21 +12,21 @@
  */
 
 interface MenuTabs {
-  label: string;
-  value: string;
+  label: string
+  value: string
   menu: {
-    type: string;
-    description: string;
-    name: string;
-    image: string;
-    price: string;
-    button: string;
-  }[];
+    type: string
+    description: string
+    name: string
+    image: string
+    price: string
+    button: string
+  }[]
 }
 
 interface Props {
-  menu: MenuTabs[];
-  defaultValue: string;
+  menu: MenuTabs[]
+  defaultValue: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -39,7 +39,10 @@ const { menu, defaultValue } = toRefs(props);
 
 <template>
   <div class="flex w-full justify-center my-10">
-    <UiTabs class="container mx-auto" :default-value="defaultValue">
+    <UiTabs
+      class="container mx-auto"
+      :default-value="defaultValue"
+    >
       <UiTabsList
         :pill="false"
         class="relative grid grid-cols-1 gap-2 xl:grid-cols-6"
@@ -58,7 +61,11 @@ const { menu, defaultValue } = toRefs(props);
 
         <UiTabsIndicator />
       </UiTabsList>
-      <UiTabsContent v-for="tab in menu" :key="tab.value" :value="tab.value">
+      <UiTabsContent
+        v-for="tab in menu"
+        :key="tab.value"
+        :value="tab.value"
+      >
         <div
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12 container mx-auto"
         >
@@ -72,4 +79,5 @@ const { menu, defaultValue } = toRefs(props);
     </UiTabs>
   </div>
 </template>
+
 <style scoped></style>

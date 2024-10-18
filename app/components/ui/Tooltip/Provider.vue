@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { TooltipProvider } from "radix-vue";
-  import type { TooltipProviderProps } from "radix-vue";
+import { TooltipProvider } from "radix-vue";
+import type { TooltipProviderProps } from "radix-vue";
 
-  const props = defineProps<TooltipProviderProps>();
+const props = defineProps<TooltipProviderProps>();
 </script>

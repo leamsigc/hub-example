@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { AlertDialogPortal } from "radix-vue";
-  import type { AlertDialogPortalProps } from "radix-vue";
+import { AlertDialogPortal } from "radix-vue";
+import type { AlertDialogPortalProps } from "radix-vue";
 
-  const props = defineProps<AlertDialogPortalProps>();
+const props = defineProps<AlertDialogPortalProps>();
 </script>

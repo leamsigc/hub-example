@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  /**
+/**
    *
    * Component Description:Desc
    *
@@ -10,30 +10,39 @@
    * @todo [ ] Integration test.
    * @todo [✔] Update the typescript.
    */
-  interface Card {
-    targetUrl: string;
-    title: string;
-    imgSrc: string;
-    date: string;
-    alt: string;
-  }
-  interface Props {
-    cards: Card[];
+interface Card {
+  targetUrl: string
+  title: string
+  imgSrc: string
+  date: string
+  alt: string
+}
+interface Props {
+  cards: Card[]
 
-    title: string;
-    subTitle: string;
-    description: string;
-  }
-  const props = defineProps<Props>();
-  const { cards, description, subTitle, title } = toRefs(props);
+  title: string
+  subTitle: string
+  description: string
+}
+const props = defineProps<Props>();
+const { cards, description, subTitle, title } = toRefs(props);
 </script>
 
 <template>
   <div class="container mx-auto">
-    <TheTitle :title="title" :subTitle="subTitle" :description="description" />
+    <TheTitle
+      :title="title"
+      :sub-title="subTitle"
+      :description="description"
+    />
     <div class="-mx-4 flex flex-wrap">
-      <TheShowCaseCard v-for="card in cards" :key="card.title" v-bind="card" />
+      <TheShowCaseCard
+        v-for="card in cards"
+        :key="card.title"
+        v-bind="card"
+      />
     </div>
   </div>
 </template>
+
 <style scoped></style>

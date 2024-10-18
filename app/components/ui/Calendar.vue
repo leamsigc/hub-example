@@ -5,21 +5,27 @@
       :is-dark="$colorMode.value == 'dark'"
       v-bind="$attrs"
     >
-      <template v-for="(_, slot) in $slots" #[slot]="scope">
-        <slot :name="slot" v-bind="scope" />
+      <template
+        v-for="(_, slot) in $slots"
+        #[slot]="scope"
+      >
+        <slot
+          :name="slot"
+          v-bind="scope"
+        />
       </template>
     </VCalendar>
   </ClientOnly>
 </template>
 
 <script lang="ts" setup>
-  import type { Calendar } from "v-calendar";
+import type { Calendar } from "v-calendar";
 
-  defineOptions({ inheritAttrs: false });
+defineOptions({ inheritAttrs: false });
 
-  interface Props extends /* @vue-ignore */ Partial<InstanceType<typeof Calendar>["$props"]> {}
+interface Props extends /* @vue-ignore */ Partial<InstanceType<typeof Calendar>["$props"]> {}
 
-  const props = defineProps<Props & { trimWeeks?: boolean }>();
+const props = defineProps<Props & { trimWeeks?: boolean }>();
 </script>
 
 <style>

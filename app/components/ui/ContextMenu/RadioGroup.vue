@@ -5,12 +5,12 @@
 </template>
 
 <script lang="ts" setup>
-  import { ContextMenuRadioGroup, useForwardPropsEmits } from "radix-vue";
-  import type { ContextMenuRadioGroupEmits, ContextMenuRadioGroupProps } from "radix-vue";
+import { ContextMenuRadioGroup, useForwardPropsEmits } from "radix-vue";
+import type { ContextMenuRadioGroupEmits, ContextMenuRadioGroupProps } from "radix-vue";
 
-  const props = defineProps<ContextMenuRadioGroupProps>();
+const props = defineProps<ContextMenuRadioGroupProps>();
 
-  const emits = defineEmits<ContextMenuRadioGroupEmits>();
+const emits = defineEmits<ContextMenuRadioGroupEmits>();
 
-  const forwarded = useForwardPropsEmits(props, emits);
+const forwarded = useForwardPropsEmits(props, emits);
 </script>

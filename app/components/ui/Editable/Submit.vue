@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { EditableSubmitTrigger } from "radix-vue";
-  import type { EditableSubmitTriggerProps } from "radix-vue";
+import { EditableSubmitTrigger } from "radix-vue";
+import type { EditableSubmitTriggerProps } from "radix-vue";
 
-  const props = defineProps<EditableSubmitTriggerProps>();
+const props = defineProps<EditableSubmitTriggerProps>();
 </script>

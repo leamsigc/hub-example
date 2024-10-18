@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { StepperTitle } from "radix-vue";
-  import type { StepperTitleProps } from "radix-vue";
+import { StepperTitle } from "radix-vue";
+import type { StepperTitleProps } from "radix-vue";
 
-  const props = defineProps<StepperTitleProps>();
+const props = defineProps<StepperTitleProps>();
 </script>

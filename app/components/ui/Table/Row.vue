@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-  const props = defineProps<{
-    class?: any;
-  }>();
+const props = defineProps<{
+  class?: any
+}>();
 
-  const styles = tv({
-    base: "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-  });
+const styles = tv({
+  base: "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
+});
 </script>

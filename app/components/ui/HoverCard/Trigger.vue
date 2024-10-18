@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-  import { HoverCardTrigger } from "radix-vue";
-  import type { HoverCardTriggerProps } from "radix-vue";
+import { HoverCardTrigger } from "radix-vue";
+import type { HoverCardTriggerProps } from "radix-vue";
 
-  defineOptions({ inheritAttrs: false });
-  const props = defineProps<HoverCardTriggerProps>();
+defineOptions({ inheritAttrs: false });
+const props = defineProps<HoverCardTriggerProps>();
 </script>

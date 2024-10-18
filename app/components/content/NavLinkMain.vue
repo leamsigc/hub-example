@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  /**
+/**
    *
    * Main navigation link
    *
@@ -11,21 +11,25 @@
    * @todo [✔] Update the typescript.
    */
 
-  interface Props {
-    to: string;
-    label?: string;
-  }
-  const props = defineProps<Props>();
-  const { to, label } = toRefs(props);
+interface Props {
+  to: string
+  label?: string
+}
+const props = defineProps<Props>();
+const { to, label } = toRefs(props);
 </script>
 
 <template>
   <NavigationMenuItem>
-    <NavigationMenuLink :href="to" :class="navigationMenuTriggerStyle()">
+    <NavigationMenuLink
+      :href="to"
+      :class="navigationMenuTriggerStyle()"
+    >
       <slot>
         {{ label }}
       </slot>
     </NavigationMenuLink>
   </NavigationMenuItem>
 </template>
+
 <style scoped></style>

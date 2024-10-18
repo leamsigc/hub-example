@@ -14,37 +14,37 @@ interface Props {
   title?: string
   description?: string
   image?: string
-  type: 'basic' | 'freemium' | 'premium'
+  type: "basic" | "freemium" | "premium"
   category?: string
   tags?: string[]
   link?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: 'basic',
-  category: 'AI',
-  image: '/baby.webp',
-  title: 'The plate name',
-  description: 'Small description of the plate',
-  tags: () => ['tag1', 'tag2'],
-  link: '/',
-})
-const { type, category, image, title, description } = toRefs(props)
+  type: "basic",
+  category: "AI",
+  image: "/baby.webp",
+  title: "The plate name",
+  description: "Small description of the plate",
+  tags: () => ["tag1", "tag2"],
+  link: "/",
+});
+const { type, category, image, title, description } = toRefs(props);
 
 const extraCss = {
   basic: {
-    base: 'shadow',
-    card: '',
+    base: "shadow",
+    card: "",
   },
   freemium: {
-    base: 'shadow',
-    card: 'bg-white',
+    base: "shadow",
+    card: "bg-white",
   },
   premium: {
-    base: 'bg-green-300 shadow-yellow-500 shadow-2xl',
-    card: 'bg-green-300',
+    base: "bg-green-300 shadow-yellow-500 shadow-2xl",
+    card: "bg-green-300",
   },
-}
+};
 </script>
 
 <template>

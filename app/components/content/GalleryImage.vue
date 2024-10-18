@@ -17,17 +17,17 @@ import Lightgallery from "lightgallery/vue";
 import "lightgallery/scss/lightgallery.scss";
 
 interface Props {
-  title: string;
-  subTitle: string;
-  description: string;
+  title: string
+  subTitle: string
+  description: string
   images: Array<{
-    id: number;
-    src: string;
-    size: string;
-    thumb: string;
-    alt: string;
-    html: string;
-  }>;
+    id: number
+    src: string
+    size: string
+    thumb: string
+    alt: string
+    html: string
+  }>
 }
 const props = defineProps<Props>();
 const { images, title, subTitle, description } = toRefs(props);
@@ -36,7 +36,11 @@ const plugins = [lgThumbnail, lgZoom];
 
 <template>
   <section class="mx-auto max-w-screen-2xl px-14 py-20">
-    <TheTitle :title="title" :subTitle="subTitle" :description="description" />
+    <TheTitle
+      :title="title"
+      :sub-title="subTitle"
+      :description="description"
+    />
     <lightgallery
       :settings="{ speed: 500, plugins: plugins, pager: false, thumbnail: false }"
       class="grid grid-cols-4 gap-5"
@@ -50,9 +54,14 @@ const plugins = [lgThumbnail, lgZoom];
         :data-tweet-text="item.alt"
         :data-sub-html="item.html"
       >
-        <img class="img-responsive" :src="item.thumb" :alt="item.alt" />
+        <img
+          class="img-responsive"
+          :src="item.thumb"
+          :alt="item.alt"
+        >
       </a>
     </lightgallery>
   </section>
 </template>
+
 <style lang="css" scoped></style>

@@ -15,8 +15,8 @@ interface Props {
   subTitle: string
   description: string
 }
-const props = defineProps<Props>()
-const { title, subTitle, description } = toRefs(props)
+const props = defineProps<Props>();
+const { title, subTitle, description } = toRefs(props);
 </script>
 
 <template>

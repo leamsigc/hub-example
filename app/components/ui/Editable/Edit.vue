@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { EditableEditTrigger } from "radix-vue";
-  import type { EditableEditTriggerProps } from "radix-vue";
+import { EditableEditTrigger } from "radix-vue";
+import type { EditableEditTriggerProps } from "radix-vue";
 
-  const props = defineProps<EditableEditTriggerProps>();
+const props = defineProps<EditableEditTriggerProps>();
 </script>

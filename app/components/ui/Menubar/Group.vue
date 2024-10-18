@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { MenubarGroup } from "radix-vue";
-  import type { MenubarGroupProps } from "radix-vue";
+import { MenubarGroup } from "radix-vue";
+import type { MenubarGroupProps } from "radix-vue";
 
-  const props = defineProps<MenubarGroupProps>();
+const props = defineProps<MenubarGroupProps>();
 </script>

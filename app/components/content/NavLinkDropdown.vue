@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-  /**
+/**
    *
    * Main navigation link
    *
@@ -11,20 +11,19 @@
    * @todo [✔] Update the typescript.
    */
 
+interface Props {
+  label?: string
 
-  interface Props {
-    label?: string;
-
-    listItems: Array<{
-      title: string;
-      href: string;
-      description: string;
-    }>;
-  }
-  const props = withDefaults(defineProps<Props>(), {
-    listItems: () => [],
-  });
-  const { label, listItems } = toRefs(props);
+  listItems: Array<{
+    title: string
+    href: string
+    description: string
+  }>
+}
+const props = withDefaults(defineProps<Props>(), {
+  listItems: () => [],
+});
+const { label, listItems } = toRefs(props);
 </script>
 
 <template>
@@ -46,4 +45,5 @@
     </NavigationMenuContent>
   </NavigationMenuItem>
 </template>
+
 <style scoped></style>

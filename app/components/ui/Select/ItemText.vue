@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-  import { SelectItemText } from "radix-vue";
-  import type { SelectItemTextProps } from "radix-vue";
+import { SelectItemText } from "radix-vue";
+import type { SelectItemTextProps } from "radix-vue";
 
-  const props = defineProps<SelectItemTextProps>();
+const props = defineProps<SelectItemTextProps>();
 </script>

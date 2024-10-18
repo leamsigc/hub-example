@@ -9,25 +9,25 @@
 </template>
 
 <script lang="ts" setup>
-  import { ToggleGroupRoot, useForwardPropsEmits } from "radix-vue";
-  import type { ToggleGroupRootEmits, ToggleGroupRootProps } from "radix-vue";
+import { ToggleGroupRoot, useForwardPropsEmits } from "radix-vue";
+import type { ToggleGroupRootEmits, ToggleGroupRootProps } from "radix-vue";
 
-  const props = withDefaults(
-    defineProps<
-      ToggleGroupRootProps & {
-        /** custom class to add to the parent */
-        class?: any;
-      }
-    >(),
-    {
-      type: "single",
+const props = withDefaults(
+  defineProps<
+    ToggleGroupRootProps & {
+      /** custom class to add to the parent */
+      class?: any
     }
-  );
+  >(),
+  {
+    type: "single",
+  },
+);
 
-  const emit = defineEmits<ToggleGroupRootEmits>();
-  const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emit);
+const emit = defineEmits<ToggleGroupRootEmits>();
+const forwarded = useForwardPropsEmits(reactiveOmit(props, "class"), emit);
 
-  const styles = tv({
-    base: "flex items-center justify-center gap-1",
-  });
+const styles = tv({
+  base: "flex items-center justify-center gap-1",
+});
 </script>

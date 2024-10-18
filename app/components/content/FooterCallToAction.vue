@@ -10,21 +10,21 @@
  * @todo [ ] Integration test.
  * @todo [✔] Update the typescript.
  */
- interface Props {
-   logoUrl?: string;
-   title?: string;
-   description?: string;
-   btns: {label: string, href: string, variant?: string}[]
-   copyright?: string
- }
- const props = withDefaults(defineProps<Props>(), {
-   logoUrl: "/logo.png",
-   title: "Let's get started on something great",
-   description: "We are here to help you with your project",
-   btns: () => [{label: "View Demo", href: "#", variant: "outline"}, {label: "Get started", href: "#"}],
-   copyright: "Copyright © 2022 Leamsigc. All rights reserved."
- })
- const { logoUrl, title, description, btns, copyright } = toRefs(props)
+interface Props {
+  logoUrl?: string
+  title?: string
+  description?: string
+  btns: { label: string, href: string, variant?: string }[]
+  copyright?: string
+}
+const props = withDefaults(defineProps<Props>(), {
+  logoUrl: "/logo.png",
+  title: "Let's get started on something great",
+  description: "We are here to help you with your project",
+  btns: () => [{ label: "View Demo", href: "#", variant: "outline" }, { label: "Get started", href: "#" }],
+  copyright: "Copyright © 2022 Leamsigc. All rights reserved.",
+});
+const { logoUrl, title, description, btns, copyright } = toRefs(props);
 </script>
 
 <template>
@@ -79,6 +79,7 @@
     </section>
   </UiContainer>
 </template>
+
 <style scoped>
 
 </style>

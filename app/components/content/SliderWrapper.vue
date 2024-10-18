@@ -10,19 +10,18 @@
  * @todo [ ] Integration test.
  * @todo [✔] Update the typescript.
  */
-interface Props{
+interface Props {
   items: T & { key: string } []
- }
+}
 
- const props = defineProps<Props>()
+const props = defineProps<Props>();
 
- const { items } = toRefs(props);
+const { items } = toRefs(props);
 
- const swapperAutoplay = {
-    delay: 8000,
-    disableOnInteraction: true,
- };
-
+const swapperAutoplay = {
+  delay: 8000,
+  disableOnInteraction: true,
+};
 </script>
 
 <template>
@@ -40,7 +39,10 @@ interface Props{
         class="dark:bg-dark my-5 rounded-xl bg-white px-4 py-[30px] dark:bg-black sm:px-[30px]"
       >
         <slot>
-          <img :src="slide.src" :alt="slide.alt">
+          <img
+            :src="slide.src"
+            :alt="slide.alt"
+          >
         </slot>
       </SwiperSlide>
       <slot name="controls">
@@ -49,6 +51,7 @@ interface Props{
     </Swiper>
   </div>
 </template>
+
 <style scoped>
 
 </style>

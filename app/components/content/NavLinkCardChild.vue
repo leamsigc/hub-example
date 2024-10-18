@@ -12,9 +12,9 @@
  */
 
 interface Props {
-  to: string;
-  title?: string;
-  description?: string;
+  to: string
+  title?: string
+  description?: string
 }
 const props = defineProps<Props>();
 const { to, description, title } = toRefs(props);
@@ -27,7 +27,10 @@ const { to, description, title } = toRefs(props);
       :href="to"
     >
       <slot>
-        <img src="https://www.radix-vue.com/logo.svg" class="h-6 w-6" />
+        <img
+          src="https://www.radix-vue.com/logo.svg"
+          class="h-6 w-6"
+        >
       </slot>
       <div class="mb-2 mt-4 text-lg font-medium">{{ title }}</div>
       <p class="text-sm leading-tight text-muted-foreground">
@@ -36,4 +39,5 @@ const { to, description, title } = toRefs(props);
     </a>
   </NavigationMenuLink>
 </template>
+
 <style scoped></style>

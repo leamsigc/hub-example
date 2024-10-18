@@ -4,8 +4,12 @@
       v-if="formLabel"
       :for="inputId"
       :class="[disabled && 'text-muted-foreground', errorMessage && 'text-destructive', 'mb-2']"
-      ><span>{{ formLabel }} <span v-if="required" class="text-destructive">*</span></span></UiLabel
     >
+      <span>{{ formLabel }} <span
+        v-if="required"
+        class="text-destructive"
+      >*</span></span>
+    </UiLabel>
     <Multiselect
       v-bind="$attrs"
       :id="inputId"
@@ -21,21 +25,45 @@
         containerActive: 'ring-2 ring-ring ring-offset-2 ring-offset-background transition',
       }"
     >
-      <template v-for="(_, slotName) in $slots" #[slotName]="scope">
-        <slot :name="slotName" v-bind="scope" />
+      <template
+        v-for="(_, slotName) in $slots"
+        #[slotName]="scope"
+      >
+        <slot
+          :name="slotName"
+          v-bind="scope"
+        />
       </template>
       <template #clear="{ clear }">
-        <button class="mr-2 flex items-center justify-center" @click="clear">
-          <Icon name="heroicons:x-mark" size="16" class="text-muted-foreground" />
+        <button
+          class="mr-2 flex items-center justify-center"
+          @click="clear"
+        >
+          <Icon
+            name="heroicons:x-mark"
+            size="16"
+            class="text-muted-foreground"
+          />
         </button>
       </template>
     </Multiselect>
-    <TransitionSlide group tag="div">
-      <p v-if="hint && !errorMessage" key="hint" class="mt-1.5 text-sm text-muted-foreground">
+    <TransitionSlide
+      group
+      tag="div"
+    >
+      <p
+        v-if="hint && !errorMessage"
+        key="hint"
+        class="mt-1.5 text-sm text-muted-foreground"
+      >
         {{ hint }}
       </p>
 
-      <p v-if="errorMessage" key="errorMessage" class="mt-1.5 text-sm text-destructive">
+      <p
+        v-if="errorMessage"
+        key="errorMessage"
+        class="mt-1.5 text-sm text-destructive"
+      >
         {{ errorMessage }}
       </p>
     </TransitionSlide>
@@ -43,63 +71,63 @@
 </template>
 
 <script setup lang="ts">
-  import Multiselect from "@vueform/multiselect";
+import Multiselect from "@vueform/multiselect";
 
-  import "@vueform/multiselect/themes/default.css";
+import "@vueform/multiselect/themes/default.css";
 
-  const multiselect = shallowRef<InstanceType<typeof Multiselect> | null>(null);
+const multiselect = shallowRef<InstanceType<typeof Multiselect> | null>(null);
 
-  interface Props
-    extends /* @vue-ignore */ Partial<Omit<InstanceType<typeof Multiselect>, "$emit">> {}
+interface Props
+  extends /* @vue-ignore */ Partial<Omit<InstanceType<typeof Multiselect>, "$emit">> {}
 
-  const props = defineProps<
-    {
-      modelValue?: any;
-      formLabel?: string;
-      required?: boolean;
-      id?: string;
-      hint?: string;
-      disabled?: boolean;
-      rules?: any;
-      validateOnMount?: boolean;
-      name?: string;
-    } & Props
-  >();
+const props = defineProps<
+  {
+    modelValue?: any
+    formLabel?: string
+    required?: boolean
+    id?: string
+    hint?: string
+    disabled?: boolean
+    rules?: any
+    validateOnMount?: boolean
+    name?: string
+  } & Props
+>();
 
-  const emit = defineEmits([
-    "paste",
-    "open",
-    "close",
-    "select",
-    "deselect",
-    "input",
-    "search-change",
-    "tag",
-    "option",
-    "update:modelValue",
-    "change",
-    "clear",
-    "keydown",
-    "keyup",
-    "max",
-    "create",
-    "ready",
-  ]);
+const emit = defineEmits([
+  "paste",
+  "open",
+  "close",
+  "select",
+  "deselect",
+  "input",
+  "search-change",
+  "tag",
+  "option",
+  "update:modelValue",
+  "change",
+  "clear",
+  "keydown",
+  "keyup",
+  "max",
+  "create",
+  "ready",
+]);
 
-  const inputId = props.id || useId();
+const inputId = props.id || useId();
 
-  const { errorMessage, value } = useField(() => props.name || inputId, props.rules, {
-    initialValue: props.modelValue,
-    label: props.label,
-    validateOnMount: props.validateOnMount,
-    syncVModel: true,
+const { errorMessage, value } = useField(() => props.name || inputId, props.rules, {
+  initialValue: props.modelValue,
+  label: props.label,
+  validateOnMount: props.validateOnMount,
+  syncVModel: true,
+});
+
+onMounted(() => {
+  nextTick(() => {
+    emit("ready", multiselect.value);
   });
-
-  onMounted(() => {
-    nextTick(() => {
-      emit("ready", multiselect.value);
-    });
-  });
+});
 </script>
 
 <style>

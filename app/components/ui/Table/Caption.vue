@@ -5,11 +5,11 @@
 </template>
 
 <script lang="ts" setup>
-  const props = defineProps<{
-    class?: any;
-  }>();
+const props = defineProps<{
+  class?: any
+}>();
 
-  const styles = tv({
-    base: "mt-4 text-sm text-muted-foreground",
-  });
+const styles = tv({
+  base: "mt-4 text-sm text-muted-foreground",
+});
 </script>

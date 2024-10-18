@@ -12,12 +12,12 @@
  */
 
 interface Props {
-  type: string;
-  description: string;
-  name: string;
-  image: string;
-  price: string;
-  button: string;
+  type: string
+  description: string
+  name: string
+  image: string
+  price: string
+  button: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -67,4 +67,5 @@ const { type, description, name, image, price, button } = toRefs(props);
     </div>
   </div>
 </template>
+
 <style scoped></style>

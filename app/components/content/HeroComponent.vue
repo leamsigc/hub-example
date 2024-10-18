@@ -11,11 +11,11 @@
  * @todo [✔] Update the typescript.
  */
 interface Props {
-  alt: string;
-  heroImageUrl: string;
-  title: string;
-  subTitle: string;
-  href: string;
+  alt: string
+  heroImageUrl: string
+  title: string
+  subTitle: string
+  href: string
 }
 const props = defineProps<Props>();
 const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
@@ -29,7 +29,7 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
       <img
         :src="heroImageUrl"
         class="absolute inset-0 h-full w-full rounded-3xl opacity-20 hidden lg:block"
-      />
+      >
       <div class="mb-20 mt-auto">
         <div class="relative rounded-3xl md:py-36 lg:px-12">
           <div class="-mx-4 mt-24 flex flex-wrap items-center space-y-6 lg:space-y-0">
@@ -44,12 +44,20 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
                   v-html="subTitle"
                 />
               </h1>
-              <UiButton class="px-16 py-6" variant="outline" :href="href">
+              <UiButton
+                class="px-16 py-6"
+                variant="outline"
+                :href="href"
+              >
                 <slot>
                   <span class="mr-5 inline-block p-1.5 text-xl uppercase">
                     Call now
                   </span>
-                  <Icon name="material-symbols:call-end" class="" :size="'24'" />
+                  <Icon
+                    name="material-symbols:call-end"
+                    class=""
+                    :size="'24'"
+                  />
                 </slot>
               </UiButton>
             </div>
@@ -59,4 +67,5 @@ const { alt, heroImageUrl, subTitle, title, href } = toRefs(props);
     </div>
   </section>
 </template>
+
 <style scoped></style>

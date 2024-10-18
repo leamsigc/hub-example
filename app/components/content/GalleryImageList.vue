@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-
 /**
  *
  * Component Description:Desc
@@ -11,24 +10,25 @@
  * @todo [ ] Integration test.
  * @todo [✔] Update the typescript.
  */
- import lgThumbnail from "lightgallery/plugins/thumbnail";
- import Zoom from "lightgallery/plugins/zoom";
- import Lightgallery from "lightgallery/vue";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import Zoom from "lightgallery/plugins/zoom";
+import Lightgallery from "lightgallery/vue";
 
- import "lightgallery/scss/lightgallery-bundle.scss";
- import "lightgallery/scss/lg-transitions.scss";
+import "lightgallery/scss/lightgallery-bundle.scss";
+import "lightgallery/scss/lg-transitions.scss";
+
 interface Images {
-  id: number;
-  src: string;
-  size: string;
-  thumb: string;
-  alt: string;
-  html: string;
-  class?: string;
+  id: number
+  src: string
+  size: string
+  thumb: string
+  alt: string
+  html: string
+  class?: string
 }
 interface Props {
-  images: Images[];
-  class?: string;
+  images: Images[]
+  class?: string
 }
 const props = defineProps<Props>();
 const { images } = toRefs(props);
@@ -49,16 +49,19 @@ const itemStyles = tv({
       plugins: plugins,
       pager: true,
       thumbnail: true,
-      zoom:true,
-      mode:'lg-slide',
-      zoomFromOrigin:true ,
-      backdropDuration:800,
-      trapFocus:true
+      zoom: true,
+      mode: 'lg-slide',
+      zoomFromOrigin: true,
+      backdropDuration: 800,
+      trapFocus: true,
     }"
     :class="styles({ class: props.class })"
   >
     <slot v-bind="images">
-      <template v-for="item in images" :key="item.id">
+      <template
+        v-for="item in images"
+        :key="item.id"
+      >
         <a
           :data-lg-size="item.size"
           :class="itemStyles({ class: item.class })"
@@ -66,7 +69,11 @@ const itemStyles = tv({
           :data-tweet-text="item.alt"
           :data-sub-html="item.html"
         >
-          <img class="img-responsive" :src="item.thumb" :alt="item.alt">
+          <img
+            class="img-responsive"
+            :src="item.thumb"
+            :alt="item.alt"
+          >
         </a>
       </template>
     </slot>

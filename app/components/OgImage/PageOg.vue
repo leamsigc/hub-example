@@ -13,11 +13,11 @@ withDefaults(defineProps<{
   username?: string
   socials?: { name: string, icon: string }[]
 }>(), {
-  bg: 'linear-gradient(to bottom right, #171717, #131313)',
-})
+  bg: "linear-gradient(to bottom right, #171717, #131313)",
+});
 
-const config = useRuntimeConfig()
-const siteName = config.public.baseUrl
+const config = useRuntimeConfig();
+const siteName = config.public.baseUrl;
 </script>
 
 <template>

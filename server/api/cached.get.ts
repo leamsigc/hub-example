@@ -9,5 +9,5 @@ export default cachedEventHandler(
   },
   {
     maxAge: 5, // 5 seconds
-  }
+  },
 );
