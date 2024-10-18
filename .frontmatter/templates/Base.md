@@ -36,7 +36,6 @@ head:
     - name: twitter:description
       content: Find the perfect baby name tailored to your preferences with NameNest! Explore unique, meaningful, and culturally significant baby names that match your style, values, and heritage.
 date: 2024-10-17T11:47:15.983Z
-slug: discover-tools-youtube-|-started-youtube
 ---
 :OgImage{component="PageOg" image="https://red-onion-restaurant-41dbe.web.app/assets/Breakfast/breakfast3.png" title="Hello from the NameNest" description="Discover Tools For YouTube| The best tools to get started with Youtube"}
 
