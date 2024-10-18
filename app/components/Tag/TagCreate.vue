@@ -21,7 +21,7 @@ const cardIsPending = ref(false);
 
 const { handleSubmit, isSubmitting } = useForm({
   // Assume validation schema is generated from Drizzle schema
-  validationSchema: getValidationSchemaFromDrizzle("tag"),
+  validationSchema: getValidationSchemaFromDrizzle("Tags"),
 });
 
 const onSubmit = handleSubmit(async (values) => {
@@ -89,7 +89,7 @@ const onSubmit = handleSubmit(async (values) => {
                   class="space-y-5"
                 >
                   <!-- Assume form fields are generated from Drizzle schema -->
-                  <FormGenerator :schema="getFormSchemaFromDrizzle('tag')" />
+                  <!-- <FormGenerator :schema="getFormSchemaFromDrizzle('Tags')" /> -->
                   <UiButton type="submit">
                     Submit
                   </UiButton>

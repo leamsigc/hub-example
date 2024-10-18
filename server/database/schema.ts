@@ -1,8 +1,9 @@
+import { randomUUID } from "crypto";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
 import { relations, sql } from "drizzle-orm";
 
-export const users = sqliteTable("users", {
-  id: integer("id").primaryKey({ autoIncrement: true }),
+export const users = sqliteTable("user", {
+  id: text("id").primaryKey().$defaultFn(() => randomUUID()),
   email: text("email").notNull().unique(),
   emailToVerify: text("email_to_verify"),
   name: text("name").notNull(),
@@ -16,7 +17,7 @@ export const users = sqliteTable("users", {
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
-export const tools = sqliteTable("tools", {
+export const tools = sqliteTable("tool", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   url: text("url"),
@@ -25,11 +26,11 @@ export const tools = sqliteTable("tools", {
   tags: text("tags"),
   pricing: text("pricing"),
   imageUrl: text("image_url"),
-  userId: integer("user_id").references(() => users.id),
+  userId: text("user_id").references(() => users.id),
   categoryId: integer("category_id").references(() => categories.id),
 });
 
-export const promotions = sqliteTable("promotions", {
+export const promotions = sqliteTable("promotion", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   toolId: integer("tool_id").references(() => tools.id),
   from: text("from"),
@@ -37,13 +38,13 @@ export const promotions = sqliteTable("promotions", {
   tag: text("tag"),
 });
 
-export const tags = sqliteTable("tags", {
+export const tags = sqliteTable("tag", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name"),
   label: text("label"),
 });
 
-export const stats = sqliteTable("stats", {
+export const stats = sqliteTable("stat", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   toolId: integer("tool_id").references(() => tools.id),
   views: integer("views"),
@@ -51,20 +52,20 @@ export const stats = sqliteTable("stats", {
   likes: integer("likes"),
 });
 
-export const images = sqliteTable("images", {
+export const images = sqliteTable("image", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   toolId: integer("tool_id").references(() => tools.id),
   url: text("url"),
   tag: text("tag"),
 });
 
-export const roles = sqliteTable("roles", {
+export const roles = sqliteTable("role", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name"),
   label: text("label"),
 });
 
-export const categories = sqliteTable("categories", {
+export const categories = sqliteTable("category", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name"),
   description: text("description").notNull().default("No description"),
@@ -72,13 +73,13 @@ export const categories = sqliteTable("categories", {
   icon: text("icon").notNull().default("i-ph-database-duotone"),
 });
 // Many-to-many relationship between users and roles
-export const userRoles = sqliteTable("user_roles", {
+export const userRoles = sqliteTable("user_role", {
   id: integer("id").primaryKey({ autoIncrement: true }),
-  userId: integer("user_id").references(() => users.id),
+  userId: text("user_id").references(() => users.id),
   roleId: integer("role_id").references(() => roles.id),
 });
 // Many-to-many relationship between tools and tags
-export const toolTags = sqliteTable("tool_tags", {
+export const toolTags = sqliteTable("tool_tag", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   toolId: integer("tool_id").references(() => tools.id),
   tagId: integer("tag_id").references(() => tags.id),

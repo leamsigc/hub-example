@@ -29,6 +29,7 @@ const topNav = [
   { title: "Tools", icon: "lucide:folder-dot", link: "/app/tools" },
   { title: "Categories", icon: "lucide:list-checks", link: "/app/categories" },
   { title: "Users", icon: "lucide:users", link: "/app/users" },
+  { title: "Tags", icon: "lucide:tag", link: "/app/tags" },
 ];
 const bottomNav = [
   { title: "Support", icon: "lucide:life-buoy", link: "#" },

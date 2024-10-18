@@ -1,7 +1,7 @@
 import type { SQL } from "drizzle-orm";
 import type { UserInsert, UserInsertWithRole } from "~~/server/utils/drizzle";
 
-export async function findUserById(userId: number) {
+export async function findUserById(userId: string) {
   return useDrizzle().select().from(tables.users).where(eq(tables.users.id, userId)).get();
 }
 
@@ -54,7 +54,7 @@ export async function createUser(user: UserInsertWithRole) {
   return createdUser;
 }
 
-export async function updateUser(userId: number, user: Partial<UserInsert>) {
+export async function updateUser(userId: string, user: Partial<UserInsert>) {
   return useDrizzle().update(tables.users).set(user).where(eq(tables.users.id, userId)).run();
 }
 
