@@ -13,7 +13,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:push": "drizzle-kit push:sqlite --config=drizzle.config.ts",
-    "create:crud": "node scripts/create-crud.mjs"
+    "create:crud": "node scripts/create-crud.mjs",
+    "op:img": "node ./scripts/optimize-images.js"
   },
   "dependencies": {
     "@internationalized/date": "^3.5.6",
@@ -37,6 +38,7 @@
     "vue-currency-input": "^3.1.0"
   },
   "devDependencies": {
+    "@squoosh/lib": "^0.5.3",
     "@formkit/auto-animate": "^0.8.2",
     "@formkit/nuxt": "^1.6.7",
     "@ianvs/prettier-plugin-sort-imports": "^4.3.1",
